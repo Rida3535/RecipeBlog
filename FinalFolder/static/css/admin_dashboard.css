@@ -1,0 +1,180 @@
+/* General Reset */
+body, h1, h2, h3, p, a {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    text-decoration: none;
+}
+
+/* Body Styling */
+body {
+    line-height: 1.6;
+    color: #333;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('/static/images/bg3.jpg');
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Wrapper for the Content */
+.wrapper {
+    flex: 1; /* This ensures the content takes up the remaining space */
+}
+
+/* Header */
+header {
+    background: linear-gradient(to right, #ff7f50, #ff4500);
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+    position: relative; /* Ensures search bar is positioned correctly */
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+header h1 {
+    font-size: 1.8em;
+}
+
+header nav a {
+    color: white;
+    margin: 0 10px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+header nav a:hover {
+    color: #f8f9fa;
+}
+
+/* Responsive Menu Button */
+.menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5em;
+    cursor: pointer;
+}
+/* Admin Dashboard Styles */
+.dashboard-container {
+    max-width: 2100px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-container h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+/* Admin Actions */
+.admin-actions {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+}
+
+.admin-actions .btn {
+    background: #f09b1b;
+    color: white;
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.admin-actions .btn:hover {
+    background: #c66d11;
+}
+
+/* Table Styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 2rem;
+    font-size: 1rem;
+}
+
+table thead {
+    background: #526ba7;
+    color: white;
+}
+
+table th, table td {
+    padding: 1rem;
+    text-align: left;
+    border: 1px solid #ccc;
+}
+
+table tbody tr:nth-child(even) {
+    background: #f3f3f3;
+}
+
+table tbody tr:hover {
+    background: #f0d8b3;
+}
+
+/* Button Styles */
+.btn-delete {
+    background: white;
+    color: #ff4500;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background 0.3s;
+    align-items: center;
+    display: flex;
+}
+
+.btn-delete:hover {
+    background: #ff4500;
+    color: white
+}
+
+.btn-edit {
+    background: white;
+    color: #ff4500;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background 0.3s;
+    align-items: center;
+    display: flex;
+    margin-left: 9px;
+}
+
+.btn-edit:hover {
+    background: #ff4500;
+    color: white
+}
+
+/* Footer */
+footer {
+    background: #333;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    margin-top: auto; /* Ensures the footer stays at the bottom */
+}
+
+footer p {
+    font-size: 1em;
+}

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <title>Search Results</title>
+</head>
+<body>
+    <header>
+        <h1>Search Results</h1>
+        <a href="{{ url_for('homepage') }}">Back to Home</a>
+    </header>
+
+    <main>
+        {% if recipes %}
+            <ul>
+                {% for recipe in recipes %}
+                    <li>
+                        <a href="/recipe/{{ recipe.id }}">{{ recipe.title }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No recipes found matching your search.</p>
+        {% endif %}
+    </main>
+    
+    <footer>
+        <p>&copy; 2024 Recipe Blog</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+</body>
+</html>

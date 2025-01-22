@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <h1>🍴 Delicious Recipes</h1>
+            <nav>
+                <a href="{{ url_for('home') }}">Home</a>
+                <a href="{{ url_for('recipe') }}">Recipe</a>
+                <a href="{{ url_for('about') }}">About</a>
+                <a href="{{ url_for('contact') }}">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="about-section">
+            <div class="container">
+                <h2>Welcome to Our Recipe Blog!</h2>
+                <p>We are passionate about sharing delicious recipes that bring joy to your table. Whether you're a professional chef or just starting out in the kitchen, our curated recipes are designed to inspire and excite your taste buds.</p>
+                
+                <h3>Our Mission</h3>
+                <p>To create a community of food enthusiasts who share their love for cooking and experimenting with new flavors. We aim to make cooking accessible, fun, and enjoyable for everyone.</p>
+                
+                <h3>What We Offer</h3>
+                <ul>
+                    <li>Step-by-step recipes for all skill levels.</li>
+                    <li>Wide variety of cuisines and categories.</li>
+                    <li>Tips and tricks to enhance your cooking skills.</li>
+                    <li>A platform to save, rate, and share your favorite recipes.</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Recipe Blog. All rights reserved.</p>
+        </div>
+    </footer>
+    
+</body>
+
+</html>

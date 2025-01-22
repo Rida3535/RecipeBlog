@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if recipe %}Edit Recipe{% else %}Add Recipe{% endif %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/add_recipe.css') }}">
+</head>
+<body>
+    <div class="wrapper">
+        <!-- Header (matching the rest of the website theme) -->
+        <header>
+            <div class="container">
+                <h1>🍴 Delicious Recipes</h1>
+                <nav>
+                    <a href="{{ url_for('home') }}">Home</a>
+                    <a href="{{ url_for('admin_dashboard') }}">Dashboard</a>
+                    <a href="{{ url_for('logout') }}">Logout</a>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Add/Edit Recipe Form -->
+        <div class="form-container">
+            <h1>{% if recipe %}Edit Recipe{% else %}Add New Recipe{% endif %}</h1>
+            <form method="POST" action="{% if recipe %}{{ url_for('edit_recipe', recipe_id=recipe.id) }}{% else %}{{ url_for('add_recipe') }}{% endif %}" enctype="multipart/form-data">
+                <label>Title:</label>
+                <input type="text" name="title" value="{{ recipe.title if recipe else '' }}" required><br>
+
+                <label>Description:</label>
+                <textarea name="description" required>{{ recipe.description if recipe else '' }}</textarea><br>
+
+                <label>Ingredients (comma-separated, e.g., Ingredient1: Quantity, Ingredient2: Quantity):</label>
+                <textarea name="ingredients" required>{% if recipe and recipe.ingredients %}{% for ingredient in recipe.ingredients %}{{ ingredient.name }}: {{ ingredient.quantity }}, {% endfor %}{% endif %}</textarea><br>
+
+                <label>Instructions:</label>
+                <textarea name="instructions" required>{{ recipe.instructions if recipe else '' }}</textarea><br>
+
+                <label>Category:</label>
+                <select id="category_id" name="category" required>
+                    {% for category in categories %}
+                        <option value="{{ category.id }}" {% if recipe and recipe.category_id == category.id %}selected{% endif %}>{{ category.name }}</option>
+                    {% endfor %}
+                </select><br>
+
+                <!-- Image Upload Section -->
+                <label for="image">Recipe Image:</label><br>
+                <input type="file" id="image" name="image" accept="image/*" /><br><br>
+
+                <input type="submit" value="{% if recipe %}Update Recipe{% else %}Add Recipe{% endif %}">
+            </form>
+        </div>
+    </div>
+</body>
+<footer>
+    <div class="container">
+        <p>&copy; 2025 Recipe Blog. All rights reserved.</p>
+    </div>
+</footer>
+
+</html>

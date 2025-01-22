@@ -1,0 +1,168 @@
+/* General Reset */
+body, h1, h2, h3, p, a {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Body Styling */
+body {
+    line-height: 1.6;
+    color: #333;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('/static/images/bg3.jpg');
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Wrapper for the Content */
+.wrapper {
+    flex: 1; /* This ensures the content takes up the remaining space */
+}
+
+/* Header */
+header {
+    background: #ff7f50;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+    position: relative; /* Ensures search bar is positioned correctly */
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+header h1 {
+    font-size: 1.8em;
+}
+
+header nav a {
+    color: white;
+    margin: 0 10px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+header nav a:hover {
+    color: #f8f9fa;
+}
+
+/* Responsive Menu Button */
+.menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+/* Profile Container */
+.profile-container {
+    width: 90%;
+    max-width: 1000px;
+    background: white;
+    padding: 30px;
+    margin: 30px auto;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.profile-card {
+    margin-bottom: 30px;
+}
+
+.profile-card img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 3px solid #ff7f50;
+    margin-bottom: 15px;
+}
+
+.profile-card h2 {
+    font-size: 2em;
+    color: #ff4500;
+}
+
+.profile-card .email {
+    font-size: 0.9em;
+    color: #777;
+}
+
+/* Liked Recipes Section */
+.liked-recipes h3 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: #ff4500;
+}
+
+.recipe-list {
+    list-style-type: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.recipe-item {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.recipe-item a {
+    text-decoration: none;
+    color: #333;
+    font-size: 1.3em;
+}
+
+.recipe-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.no-recipes {
+    font-size: 1.2em;
+    color: #777;
+}
+
+/* Button Styles */
+.btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 1em;
+    color: white;
+    background: #ff4500;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+}
+
+.btn:hover {
+    background: #ff7f50;
+}
+
+/* Footer */
+footer {
+    background: #333;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    margin-top: auto; /* Ensures the footer stays at the bottom */
+}
+
+footer p {
+    font-size: 1em;
+}
+
