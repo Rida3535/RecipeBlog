@@ -270,14 +270,30 @@ def edit_recipe(recipe_id):
     return render_template('add_recipe.html', recipe=recipe, categories=categories)
 
 # User Profile (View liked recipes)
+# User Profile (View liked recipes)
 @app.route('/profile')
 def profile():
     if 'user_id' not in session:
         flash('Please login to view your profile.', 'warning')
         return redirect(url_for('login'))
     
+    # Fetch user data (username and email) from the database
+    user = user_repository.get_user_by_id(session['user_id'])  # Fetch user by ID
+    
+    if not user:
+        flash('User not found.', 'danger')
+        return redirect(url_for('login'))
+    
+    # Fetch liked recipes for the user
     liked_recipes = user_repository.get_liked_recipes(session['user_id'])
-    return render_template('profile.html', liked_recipes=liked_recipes)
+    
+    # Pass user data and liked recipes to the template
+    return render_template(
+        'profile.html',
+        username=user.username,  # Access attributes of the User object
+        email=user.email,
+        liked_recipes=liked_recipes
+    )
 
 # Contact Page Route
 @app.route('/contact', methods=['GET', 'POST'])

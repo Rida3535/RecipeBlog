@@ -21,7 +21,7 @@ body {
 
 /* Header */
 header {
-    background: #ff7f50;
+    background: #FF6830;
     color: white;
     padding: 15px 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -33,9 +33,21 @@ header .container {
     align-items: center;
 }
 
-header h1 {
-    font-size: 1.8em;
-    font-weight: bold;
+header .logo-title {
+    display: flex;
+    align-items: center;
+}
+
+header .logo-title .logo {
+    margin-right: 10px; /* Remove any default spacing */
+}
+
+header .logo-title h1 {
+    margin: 0;
+    padding: 0;
+    font-family: 'Gistesy', sans-serif;
+    font-size: 2.5rem; /* Adjust font size as needed */
+    line-height: 1; /* Ensure vertical alignment */
 }
 
 header nav a {

@@ -1,22 +1,3 @@
-# Singleton Pattern: Recipe Database Manager
-"""class RecipeDatabase:
-    _instance = None
-
-    def __new__(cls):
-        if cls._instance is None:
-            cls._instance = super(RecipeDatabase, cls).__new__(cls)
-            cls._instance._recipes = []
-        return cls._instance
-
-    def add_recipe(self, recipe):
-        self._recipes.append(recipe)
-
-    def get_all_recipes(self):
-        return self._recipes
-
-    def get_recipes_by_category(self, category):
-        return [recipe for recipe in self._recipes if recipe.category == category]"""
-    
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from model import Recipe  # Assuming Recipe model is already defined

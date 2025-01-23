@@ -11,7 +11,12 @@
         <!-- Header (matching the rest of the website theme) -->
         <header>
             <div class="container">
-                <h1>🍴 Delicious Recipes</h1>
+                <!-- Logo and Title -->
+            <div class="logo-title">
+                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo" class="logo" width="40"
+                    height="59">
+                <h1>Ricette Deliziose</h1>
+            </div>
                 <nav>
                     <a href="{{ url_for('home') }}">Home</a>
                     <a href="{{ url_for('admin_dashboard') }}">Dashboard</a>
