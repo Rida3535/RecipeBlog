@@ -44,8 +44,11 @@
                 </select><br>
 
                 <!-- Image Upload Section -->
-                <label for="image">Recipe Image:</label><br>
-                <input type="file" id="image" name="image" accept="image/*" /><br><br>
+                <div class="file-input-wrapper">
+                    <label for="image" class="custom-file-label">Choose </label>
+                    <input type="file" id="image" name="image" accept="image/*" />
+                </div>
+                
 
                 <input type="submit" value="{% if recipe %}Update Recipe{% else %}Add Recipe{% endif %}">
             </form>
