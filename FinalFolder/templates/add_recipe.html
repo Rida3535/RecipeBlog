@@ -49,10 +49,13 @@
                 </select><br>
 
                 <!-- Image Upload Section -->
-                <div class="file-input-wrapper">
-                    <label for="image" class="custom-file-label">Choose </label>
-                    <input type="file" id="image" name="image" accept="image/*" />
+                <div class="drag-drop-container">
+                    <button class="drag-drop-btn">CHOOSE FILES</button>
+                    <span class="drag-drop-text">or drop files here</span>
                 </div>
+                
+                
+                
                 
 
                 <input type="submit" value="{% if recipe %}Update Recipe{% else %}Add Recipe{% endif %}">
