@@ -112,13 +112,13 @@ header nav a:hover {
     background: #1d365e;
 }
 
-/* Footer */
+
 footer {
     background: #333;
     color: white;
     text-align: center;
     padding: 10px;
-    margin-top: auto; /* Ensures the footer stays at the bottom */
+    margin-top: auto;
 }
 
 footer p {

@@ -75,7 +75,7 @@ header nav a:hover {
 
 /* Form Inputs */
 input[type="text"], textarea, select {
-    width: 100%;
+    width: 96%;
     padding: 15px;
     font-size: 1.1em;
     margin-bottom: 20px;
@@ -87,14 +87,14 @@ input[type="text"], textarea, select {
 }
 
 input[type="text"]:focus, textarea:focus, select:focus {
-    border-color: #ff4500;
+    border-color: #f09b1b ;
     background: #fff;
     box-shadow: 0 0 8px rgba(255, 69, 0, 0.3);
 }
 
 /* Button Styling */
 input[type="submit"] {
-    background: #ff7f50;
+    background: #526ba7;
     color: white;
     border: none;
     padding: 15px 25px;
@@ -107,7 +107,7 @@ input[type="submit"] {
 }
 
 input[type="submit"]:hover {
-    background: #ff4500;
+    background: #1d365e;
     transform: translateY(-3px);
 }
 
@@ -123,6 +123,30 @@ label {
 textarea {
     min-height: 180px;
     resize: vertical; /* Allows user to resize vertically */
+}
+select {
+    width: 100%; 
+}
+input[type="file"] {
+    display: block;
+    font-size: 1rem; 
+    color: #555; 
+    background-color: #f9f9f9; 
+    border: 1px solid #ccc; 
+    border-radius: 5px; 
+    padding: 8px 12px;
+    cursor: pointer; 
+    width: 100%; 
+    max-width: 300px; 
+    transition: all 0.3s ease; 
+}
+input[type="file"]:hover {
+    border-color: #aaa;
+}
+input[type="file"]:focus {
+    border-color: #ff4500; 
+    box-shadow: 0 0 5px rgba(255, 69, 0, 0.5); 
+    outline: none;
 }
 
 /* Mobile Responsiveness */
