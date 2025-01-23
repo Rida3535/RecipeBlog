@@ -9,7 +9,7 @@ body, h1, h2, h3, p, a, input, textarea, select {
 body {
     line-height: 1.6;
     color: #333;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('/static/images/bg3.jpg');
+    background-image:  linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('/static/images/bg3.jpg');
     background-size: cover;
     display: flex;
     flex-direction: column;
@@ -77,12 +77,20 @@ header nav a:hover {
 }
 
 #contact-form input, #contact-form textarea {
-    width: 100%;
+    outline: none;
+    width: 96%;
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 5px;
     font-size: 16px;
+
 }
+#contact-form input:focus, #contact-form textarea:focus {
+    outline: none;
+    border: 2px solid #f09b1b ;
+    transition: all 0.3s ease;
+}
+
 
 #contact-form textarea {
     height: 120px;
@@ -90,7 +98,7 @@ header nav a:hover {
 }
 
 #contact-form .btn {
-    background: #ff7f50;
+    background: #526ba7;
     color: white;
     padding: 10px 20px;
     border: none;
