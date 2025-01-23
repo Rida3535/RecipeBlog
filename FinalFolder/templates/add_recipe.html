@@ -1,22 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% if recipe %}Edit Recipe{% else %}Add Recipe{% endif %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/add_recipe.css') }}">
 </head>
+
 <body>
     <div class="wrapper">
         <!-- Header (matching the rest of the website theme) -->
         <header>
             <div class="container">
                 <!-- Logo and Title -->
-            <div class="logo-title">
-                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo" class="logo" width="40"
-                    height="59">
-                <h1>Ricette Deliziose</h1>
-            </div>
+                <div class="logo-title">
+                    <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo" class="logo" width="40"
+                        height="59">
+                    <h1>Ricette Deliziose</h1>
+                </div>
                 <nav>
                     <a href="{{ url_for('home') }}">Home</a>
                     <a href="{{ url_for('admin_dashboard') }}">Dashboard</a>
@@ -28,7 +30,9 @@
         <!-- Add/Edit Recipe Form -->
         <div class="form-container">
             <h1>{% if recipe %}Edit Recipe{% else %}Add New Recipe{% endif %}</h1>
-            <form method="POST" action="{% if recipe %}{{ url_for('edit_recipe', recipe_id=recipe.id) }}{% else %}{{ url_for('add_recipe') }}{% endif %}" enctype="multipart/form-data">
+            <form method="POST"
+                action="{% if recipe %}{{ url_for('edit_recipe', recipe_id=recipe.id) }}{% else %}{{ url_for('add_recipe') }}{% endif %}"
+                enctype="multipart/form-data">
                 <label>Title:</label>
                 <input type="text" name="title" value="{{ recipe.title if recipe else '' }}" required><br>
 
@@ -36,7 +40,8 @@
                 <textarea name="description" required>{{ recipe.description if recipe else '' }}</textarea><br>
 
                 <label>Ingredients (comma-separated, e.g., Ingredient1: Quantity, Ingredient2: Quantity):</label>
-                <textarea name="ingredients" required>{% if recipe and recipe.ingredients %}{% for ingredient in recipe.ingredients %}{{ ingredient.name }}: {{ ingredient.quantity }}, {% endfor %}{% endif %}</textarea><br>
+                <textarea name="ingredients"
+                    required>{% if recipe and recipe.ingredients %}{% for ingredient in recipe.ingredients %}{{ ingredient.name }}: {{ ingredient.quantity }}, {% endfor %}{% endif %}</textarea><br>
 
                 <label>Instructions:</label>
                 <textarea name="instructions" required>{{ recipe.instructions if recipe else '' }}</textarea><br>
@@ -44,24 +49,29 @@
                 <label>Category:</label>
                 <select id="category_id" name="category" required>
                     {% for category in categories %}
-                        <option value="{{ category.id }}" {% if recipe and recipe.category_id == category.id %}selected{% endif %}>{{ category.name }}</option>
+                    <option value="{{ category.id }}" {% if recipe and recipe.category_id==category.id %}selected{%
+                        endif %}>{{ category.name }}</option>
                     {% endfor %}
                 </select><br>
 
                 <!-- Image Upload Section -->
-                <div class="drag-drop-container">
-                    <button class="drag-drop-btn">CHOOSE FILES</button>
+                <div class="drag-drop-container" onclick="document.getElementById('image').click()">
+                    <input type="file" id="image" name="image" accept="image/*" style="display: none;"
+                        onchange="showImagePreview(event)" />
+                    <button class="drag-drop-btn" type="button">CHOOSE FILES</button>
                     <span class="drag-drop-text">or drop files here</span>
+                
+                    <div class="preview-container">
+                        <img id="preview" src="" alt="Image Preview" style="display: none;" />
+                        <span id="filename" class="filename-text"></span>
+                    </div>
                 </div>
-                
-                
-                
-                
 
                 <input type="submit" value="{% if recipe %}Update Recipe{% else %}Add Recipe{% endif %}">
             </form>
         </div>
     </div>
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
 </body>
 <footer>
     <div class="container">
