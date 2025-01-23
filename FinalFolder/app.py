@@ -270,7 +270,6 @@ def edit_recipe(recipe_id):
     return render_template('add_recipe.html', recipe=recipe, categories=categories)
 
 # User Profile (View liked recipes)
-# User Profile (View liked recipes)
 @app.route('/profile')
 def profile():
     if 'user_id' not in session:
@@ -340,22 +339,6 @@ def admin_dashboard():
             return redirect(url_for('edit_recipe', recipe_id=recipe_id))
         
     return render_template('admin_dashboard.html', recipes=recipes)
-
-@app.route('/add_comment/<int:recipe_id>', methods=['POST'])
-def add_comment(recipe_id):
-    if 'user_id' not in session:
-        flash('Please login to add comments.', 'warning')
-        return redirect(url_for('login'))
-
-    comment_text = request.form['comment']
-    # Logic to save the comment to the database for the recipe
-    # For example:
-    comment = comment(recipe_id=recipe_id, user_id=session['user_id'], text=comment_text)
-    db.session.add(comment)
-    db.session.commit()
-
-    flash('Your comment has been added!', 'success')
-    return redirect(url_for('recipe_details', recipe_id=recipe_id))
 
 @app.route('/search', methods=['GET'])
 def search():
