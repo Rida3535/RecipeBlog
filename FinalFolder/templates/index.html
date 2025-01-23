@@ -11,7 +11,12 @@
 <body>
     <header>
         <div class="container">
-            <h1>🍴 Delicious Recipes</h1>
+            <!-- Logo and Title -->
+            <div class="logo-title">
+                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo" class="logo" width="40"
+                    height="59">
+                <h1>Ricette Deliziose</h1>
+            </div>
             <nav>
                 <!-- Search Icon -->
                 <button id="search-icon" onclick="toggleSearchBar()">
@@ -30,15 +35,15 @@
                 <a href="{{ url_for('contact') }}">Contact</a>
 
                 {% if 'user_id' in session %}
-                    {% if session['is_admin'] %}
-                    <!-- Admin View -->
-                        <a href="{{ url_for('admin_dashboard') }}">Dashboard</a>
-                        <a href="{{ url_for('logout') }}">Logout</a>
-                    {% else %}
-                    <!-- Regular User View -->
-                        <a href="{{ url_for('profile') }}">Profile</a>
-                        <a href="{{ url_for('logout') }}">Logout</a>
-                    {% endif %}
+                {% if session['is_admin'] %}
+                <!-- Admin View -->
+                <a href="{{ url_for('admin_dashboard') }}">Dashboard</a>
+                <a href="{{ url_for('logout') }}">Logout</a>
+                {% else %}
+                <!-- Regular User View -->
+                <a href="{{ url_for('profile') }}">Profile</a>
+                <a href="{{ url_for('logout') }}">Logout</a>
+                {% endif %}
                 {% else %}
                 <!-- Not Logged In -->
                 <a href="{{ url_for('login') }}">Login</a>

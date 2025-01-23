@@ -6,6 +6,20 @@ body, h1, h2, h3, p, a, button {
     text-decoration: none;
 }
 
+body h2{
+    color:#fff;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    color: #fff;
+    display: inline-block; 
+    background-color: #526ba7; 
+    padding: 10px 20px; 
+    font-size: 1.2em; 
+    border-radius: 50px;
+    text-align: center; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
 /* Body Styling */
 body {
     line-height: 1.6;
@@ -26,7 +40,7 @@ body {
 
 /* Header */
 header {
-    background: linear-gradient(to right, #ff7f50, #ff4500);
+    background: #FF6830 ;
     color: white;
     padding: 20px 0;
     text-align: center;
@@ -36,18 +50,35 @@ header .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 20px;
+    padding: 0 45px;
+}
+
+header .logo-title {
+    display: flex;
+    align-items: center;
+}
+
+header .logo-title .logo {
+    margin-right: 10px; /* Remove any default spacing */
+}
+
+header .logo-title h1 {
+    margin: 0;
+    padding: 0;
+    font-family: 'Gistesy', sans-serif;
+    font-size: 2.5rem; /* Adjust font size as needed */
+    line-height: 1; /* Ensure vertical alignment */
 }
 
 header nav a {
     color: white;
     margin: 0 10px;
-    transition: color 0.3s ease;
     font-weight: bold;
 }
 
 header nav a:hover {
     color: #f8f9fa;
+    text-decoration: underline;
 }
 
 /* Categories Section */

@@ -1,3 +1,5 @@
+@import url('https://fonts.cdnfonts.com/css/gistesy');
+
 /* General Reset */
 body, h1, h2, h3, p, a {
     margin: 0;
@@ -23,7 +25,7 @@ body {
 
 /* Header */
 header {
-    background: #ff7f50;
+    background: #FF6830;
     color: white;
     padding: 20px 0;
     text-align: center;
@@ -34,11 +36,24 @@ header .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 20px;
+    padding: 0 45px;
 }
 
-header h1 {
-    font-size: 1.8em;
+header .logo-title {
+    display: flex;
+    align-items: center;
+}
+
+header .logo-title .logo {
+    margin-right: 10px; /* Remove any default spacing */
+}
+
+header .logo-title h1 {
+    margin: 0;
+    padding: 0;
+    font-family: 'Gistesy', sans-serif;
+    font-size: 2.5rem; /* Adjust font size as needed */
+    line-height: 1; /* Ensure vertical alignment */
 }
 
 header nav a {
@@ -46,11 +61,11 @@ header nav a {
     margin: 0 10px;
     text-decoration: none;
     font-weight: bold;
-    transition: color 0.3s ease;
 }
 
 header nav a:hover {
     color: #f8f9fa;
+    text-decoration: underline;
 }
 
 /* Responsive Menu Button */
@@ -89,19 +104,19 @@ header nav a:hover {
 
 .profile-card h2 {
     font-size: 2em;
-    color: #ff4500;
+    color: #333;
 }
 
 .profile-card .email {
     font-size: 0.9em;
-    color: #777;
+    color: #333;
 }
 
 /* Liked Recipes Section */
 .liked-recipes h3 {
     font-size: 2em;
     margin-bottom: 20px;
-    color: #ff4500;
+    color: #526ba7;
 }
 
 .recipe-list {
@@ -113,7 +128,7 @@ header nav a:hover {
 }
 
 .recipe-item {
-    background: white;
+    background: #f09b1b;
     padding: 15px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -122,13 +137,15 @@ header nav a:hover {
 
 .recipe-item a {
     text-decoration: none;
-    color: #333;
+    color: #fff;
     font-size: 1.3em;
+    font-weight:bold;
 }
 
 .recipe-item:hover {
     transform: scale(1.05);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    background: #c66d11;
 }
 
 .no-recipes {
@@ -143,14 +160,14 @@ header nav a:hover {
     padding: 10px 20px;
     font-size: 1em;
     color: white;
-    background: #ff4500;
+    background: #ff7f50;
     text-decoration: none;
     border-radius: 5px;
     transition: background 0.3s ease;
 }
 
 .btn:hover {
-    background: #ff7f50;
+    background: #ff4500;
 }
 
 /* Footer */
