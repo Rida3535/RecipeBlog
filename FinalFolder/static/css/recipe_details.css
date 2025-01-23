@@ -4,8 +4,6 @@ body, h1, h2, h3, p, a, ul, li, form, textarea, button {
     padding: 0;
     font-family: 'Poppins', sans-serif;
     text-decoration: none;
-   /* list-style: none; */
-    box-sizing: border-box;
 }
 
 /* Body Styling */
@@ -13,7 +11,6 @@ body {
     background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('/static/images/bg3.jpg');
     background-size: cover;
     color: #333;
-    line-height: 1.6;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
