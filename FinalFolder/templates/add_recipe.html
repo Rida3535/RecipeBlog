@@ -11,7 +11,12 @@
         <!-- Header (matching the rest of the website theme) -->
         <header>
             <div class="container">
-                <h1>🍴 Delicious Recipes</h1>
+                <!-- Logo and Title -->
+            <div class="logo-title">
+                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo" class="logo" width="40"
+                    height="59">
+                <h1>Ricette Deliziose</h1>
+            </div>
                 <nav>
                     <a href="{{ url_for('home') }}">Home</a>
                     <a href="{{ url_for('admin_dashboard') }}">Dashboard</a>
@@ -44,8 +49,14 @@
                 </select><br>
 
                 <!-- Image Upload Section -->
-                <label for="image">Recipe Image:</label><br>
-                <input type="file" id="image" name="image" accept="image/*" /><br><br>
+                <div class="drag-drop-container">
+                    <button class="drag-drop-btn">CHOOSE FILES</button>
+                    <span class="drag-drop-text">or drop files here</span>
+                </div>
+                
+                
+                
+                
 
                 <input type="submit" value="{% if recipe %}Update Recipe{% else %}Add Recipe{% endif %}">
             </form>

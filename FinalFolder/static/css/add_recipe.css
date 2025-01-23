@@ -23,7 +23,7 @@ body {
 
 /* Header Styling */
 header {
-    background: #ff7f50;
+    background: #FF6830;
     color: white;
     padding: 20px 0;
     text-align: center;
@@ -34,11 +34,24 @@ header .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 20px;
+    padding: 0 45px;
 }
 
-header h1 {
-    font-size: 1.8em;
+header .logo-title {
+    display: flex;
+    align-items: center;
+}
+
+header .logo-title .logo {
+    margin-right: 10px; /* Remove any default spacing */
+}
+
+header .logo-title h1 {
+    margin: 0;
+    padding: 0;
+    font-family: 'Gistesy', sans-serif;
+    font-size: 2.5rem; /* Adjust font size as needed */
+    line-height: 1; /* Ensure vertical alignment */
 }
 
 header nav a {
@@ -46,11 +59,11 @@ header nav a {
     margin: 0 10px;
     text-decoration: none;
     font-weight: bold;
-    transition: color 0.3s ease;
 }
 
 header nav a:hover {
     color: #f8f9fa;
+    text-decoration: underline;
 }
 
 /* Form Container */
@@ -75,7 +88,7 @@ header nav a:hover {
 
 /* Form Inputs */
 input[type="text"], textarea, select {
-    width: 100%;
+    width: 96%;
     padding: 15px;
     font-size: 1.1em;
     margin-bottom: 20px;
@@ -87,14 +100,14 @@ input[type="text"], textarea, select {
 }
 
 input[type="text"]:focus, textarea:focus, select:focus {
-    border-color: #ff4500;
+    border-color: #f09b1b ;
     background: #fff;
     box-shadow: 0 0 8px rgba(255, 69, 0, 0.3);
 }
 
 /* Button Styling */
 input[type="submit"] {
-    background: #ff7f50;
+    background: #526ba7;
     color: white;
     border: none;
     padding: 15px 25px;
@@ -107,7 +120,7 @@ input[type="submit"] {
 }
 
 input[type="submit"]:hover {
-    background: #ff4500;
+    background: #1d365e;
     transform: translateY(-3px);
 }
 
@@ -122,8 +135,55 @@ label {
 /* Textarea Styling */
 textarea {
     min-height: 180px;
-    resize: vertical; /* Allows user to resize vertically */
+    resize: vertical; 
 }
+select {
+    width: 100%; 
+}
+/* Outer Container */
+.drag-drop-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    padding: 20px 40px;
+    border-radius: 20px;
+    box-shadow: 0px 15px 25px rgba(0, 0, 0, 0.1);
+    max-width: 350px;
+    margin: auto;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Button Style */
+.drag-drop-btn {
+    background-color: #ffffff;
+    color: #555;
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 10px 20px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Button Hover Effect */
+.drag-drop-btn:hover {
+    background-color: #f0f0f0;
+    border-color: #bbb;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Text Below Button */
+.drag-drop-text {
+    margin-top: 10px;
+    font-size: 0.9rem;
+    color: #888;
+    font-style: italic;
+}
+
 
 /* Mobile Responsiveness */
 @media (max-width: 768px) {

@@ -70,4 +70,4 @@ class Category(db.Model):
     name = db.Column(db.String(50), unique=True, nullable=False)
 
     def __repr__(self):
-        return f'<Category {self.name}>'
+        return f'{self.name}'
