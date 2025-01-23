@@ -86,3 +86,25 @@ function searchRecipes() {
         }
     }
 }
+
+// Image Uploader
+function showImagePreview(event) {
+    const fileInput = event.target;
+    const file = fileInput.files[0];
+
+    if (file) {
+        const preview = document.getElementById('preview');
+        const filename = document.getElementById('filename');
+        
+        // Show the filename
+        filename.textContent = `Uploaded File: ${file.name}`;
+
+        // Show the image preview
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            preview.src = e.target.result;
+            preview.style.display = 'block';
+        };
+        reader.readAsDataURL(file);
+    }
+}
