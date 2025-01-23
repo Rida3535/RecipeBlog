@@ -61,7 +61,7 @@ header nav a:hover {
 
 .recipe-detail-container h1 {
     text-align: center;
-    color: #ff4500;
+    color: #526ba7;
     margin-bottom: 20px;
     font-size: 2em;
 }
@@ -85,7 +85,7 @@ header nav a:hover {
 /* Recipe Ingredients */
 .recipe-ingredients h3 {
     font-size: 1.5em;
-    color: #ff4500;
+    color: #f09b1b;
     margin-bottom: 10px;
 }
 
@@ -103,7 +103,7 @@ header nav a:hover {
 /* Recipe Instructions */
 .recipe-instructions h2 {
     font-size: 1.8em;
-    color: #ff4500;
+    color: #f09b1b;
     margin-bottom: 15px;
 }
 
@@ -126,7 +126,7 @@ header nav a:hover {
 }
 
 .recipe-category strong {
-    color: #ff4500;
+    color: #f09b1b;
 }
 
 /* Recipe Rating */
