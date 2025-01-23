@@ -7,7 +7,6 @@ body, h1, h2, h3, p, a, button {
 }
 
 body h2{
-    color:#fff;
     margin-bottom: 20px;
     margin-top: 20px;
     color: #fff;
@@ -172,7 +171,7 @@ header nav a:hover {
 .card-buttons .btn-view {
     display: block;
     margin: 10px auto;
-    background: #526ba7; /* Green */
+    background: #526ba7; 
     color: white;
     padding: 10px 15px;
     border-radius: 5px;

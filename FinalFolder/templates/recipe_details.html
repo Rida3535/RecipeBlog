@@ -12,7 +12,12 @@
 <body>
     <header>
         <div class="container">
-            <h1>🍴 Delicious Recipes</h1>
+            <!-- Logo and Title -->
+            <div class="logo-title">
+                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo" class="logo" width="40"
+                    height="59">
+                <h1>Ricette Deliziose</h1>
+            </div>
             <nav>
                 <a href="{{ url_for('home') }}">Home</a>
                 <a href="{{ url_for('recipe') }}">Recipes</a>
@@ -42,7 +47,7 @@
 
         <!-- Recipe Ingredients -->
         <div class="recipe-ingredients">
-            <h3>Ingredients:</h3>
+            <h2>Ingredients:</h2>
             <ul>
                 {% for ingredient in recipe.ingredients %}
                 <li>{{ ingredient.name }} - {{ ingredient.quantity }}</li>
@@ -66,41 +71,10 @@
 
         <!-- Recipe Category -->
         <div class="recipe-category">
-            <p><strong>Category  </strong> {{ recipe.category }}</p>
+            <p><strong>Category:  </strong> {{ recipe.category }}</p>
         </div>
-
-        <!-- Recipe Rating -->
-        {% if recipe.rating %}
-        <div class="recipe-rating">
-            <p><strong>Rating:</strong> {{ recipe.rating }} / 5</p>
-        </div>
-        {% endif %}
-
-        <!-- Comment Section -->
-        <div class="recipe-comments">
-            <h3>Comments</h3>
-            {% if recipe.comments %}
-            <ul>
-                {% for comment in recipe.comments %}
-                <li><strong>{{ comment.username }}:</strong> {{ comment.text }}</li>
-                {% endfor %}
-            </ul>
-            {% else %}
-            <p>No comments yet. Be the first to comment!</p>
-            {% endif %}
-        </div>
-
-        <!-- Add Comment Form -->
-        {% if 'user_id' in session %}
-        <form method="POST" action="{{ url_for('add_comment', recipe_id=recipe.id) }}">
-            <textarea name="comment" placeholder="Add a comment..." required></textarea>
-            <button type="submit">Post Comment</button>
-        </form>
-        {% else %}
-        <p>Please <a href="{{ url_for('login') }}">login</a> to add a comment.</p>
-        {% endif %}
     </div>
-
+    
     <!-- Footer -->
     <footer>
         <p>&copy; 2024 Recipe Blog. All rights reserved.</p>

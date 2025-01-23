@@ -4,7 +4,7 @@ body, h1, h2, h3, p, a, ul, li, form, textarea, button {
     padding: 0;
     font-family: 'Poppins', sans-serif;
     text-decoration: none;
-    list-style: none;
+   /* list-style: none; */
     box-sizing: border-box;
 }
 
@@ -31,6 +31,7 @@ header .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 0 45px;
 }
 
 header .logo-title {
@@ -53,12 +54,12 @@ header .logo-title h1 {
 header nav a {
     margin-left: 20px;
     color: white;
-    font-weight: 500;
-    transition: color 0.3s;
+    font-weight: bold;
 }
 
 header nav a:hover {
     color: #ffe6dc;
+    text-decoration: underline;
 }
 
 /* Recipe Detail Container */
@@ -72,16 +73,21 @@ header nav a:hover {
 }
 
 .recipe-detail-container h1 {
-    text-align: center;
-    color: #526ba7;
     margin-bottom: 20px;
-    font-size: 2em;
+    margin-top: 20px;
+    color: #fff;
+    background-color: #f09b1b; 
+    padding: 10px 20px; 
+    font-size: 2em; 
+    border-radius: 50px;
+    text-align: center; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 /* Recipe Image */
 .recipe-image img {
     width: 100%;
-    max-height: 400px;
+    max-height: auto;
     object-fit: cover;
     border-radius: 10px;
     margin-bottom: 20px;
@@ -95,9 +101,9 @@ header nav a:hover {
 }
 
 /* Recipe Ingredients */
-.recipe-ingredients h3 {
-    font-size: 1.5em;
-    color: #f09b1b;
+.recipe-ingredients h2 {
+    font-size: 1.8em;
+    color: #526ba7;
     margin-bottom: 10px;
 }
 
@@ -115,7 +121,7 @@ header nav a:hover {
 /* Recipe Instructions */
 .recipe-instructions h2 {
     font-size: 1.8em;
-    color: #f09b1b;
+    color: #526ba7;
     margin-bottom: 15px;
 }
 
@@ -128,89 +134,17 @@ header nav a:hover {
     font-size: 1.1em;
     margin-bottom: 10px;
     line-height: 1.6;
-}
+} 
 
 /* Recipe Category */
 .recipe-category {
     font-size: 1.2em;
     margin: 15px 0;
-    font-weight: bold;
 }
 
 .recipe-category strong {
-    color: #f09b1b;
-}
-
-/* Recipe Rating */
-.recipe-rating {
-    font-size: 1.2em;
-    color: #ff4500;
-    margin-bottom: 20px;
-}
-
-/* Comment Section */
-.recipe-comments {
-    margin-top: 30px;
-    padding-top: 20px;
-    border-top: 1px solid #ddd;
-}
-
-.recipe-comments h3 {
-    font-size: 1.5em;
-    color: #ff4500;
-    margin-bottom: 15px;
-}
-
-.recipe-comments ul {
-    margin-top: 10px;
-    padding-left: 20px;
-}
-
-.recipe-comments li {
-    margin-bottom: 15px;
-    font-size: 1em;
-    color: #333;
-}
-
-.recipe-comments strong {
-    color: #ff4500;
-}
-
-/* Add Comment Form */
-form {
-    margin-top: 20px;
-}
-
-textarea {
-    width: 100%;
-    height: 100px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 10px;
-    font-size: 1em;
-    resize: none;
-    margin-bottom: 10px;
-}
-
-textarea:focus {
-    outline: none;
-    border-color: #ff4500;
-    box-shadow: 0 0 5px rgba(255, 69, 0, 0.5);
-}
-
-button {
-    background: #ff7f50;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    font-size: 1em;
-    cursor: pointer;
-    transition: background 0.3s ease;
-}
-
-button:hover {
-    background: #ff4500;
+    color: #526ba7;
+    font-weight: bold;
 }
 
 /* Footer */
