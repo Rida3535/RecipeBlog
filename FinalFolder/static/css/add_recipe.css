@@ -135,7 +135,7 @@ label {
 /* Textarea Styling */
 textarea {
     min-height: 180px;
-    resize: vertical; /* Allows user to resize vertically */
+    resize: vertical; 
 }
 select {
     width: 100%; 
