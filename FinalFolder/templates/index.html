@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recipe Blog</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 
@@ -18,37 +19,37 @@
                 <h1>Ricette Deliziose</h1>
             </div>
             <nav>
-                <!-- Search Icon -->
-                <button id="search-icon" onclick="toggleSearchBar()">
-                    <img src="{{ url_for('static', filename='images/search-icon.png') }}" alt="Search" width="30"
-                        height="30">
-                </button>
-
                 <!-- Search Form -->
-                <form id="search-form" style="display:none;">
-                    <input type="text" id="search-bar" placeholder="Search recipes..." onkeyup="searchRecipes()">
-                </form>
+                <div class="box">
+                    <form name="search" onsubmit="return false;">
+                        <input type="text" class="input" name="txt" id="search-bar" placeholder="Search Recipes..."
+                            onkeyup="searchRecipes()">
+                        <i class="fas fa-search"></i>
+                    </form>
+                </div>
 
-                <a href="{{ url_for('home') }}">Home</a>
-                <a href="{{ url_for('recipe') }}">Recipes</a>
-                <a href="{{ url_for('about') }}">About</a>
-                <a href="{{ url_for('contact') }}">Contact</a>
 
-                {% if 'user_id' in session %}
-                {% if session['is_admin'] %}
-                <!-- Admin View -->
-                <a href="{{ url_for('admin_dashboard') }}">Dashboard</a>
-                <a href="{{ url_for('logout') }}">Logout</a>
-                {% else %}
-                <!-- Regular User View -->
-                <a href="{{ url_for('profile') }}">Profile</a>
-                <a href="{{ url_for('logout') }}">Logout</a>
-                {% endif %}
-                {% else %}
-                <!-- Not Logged In -->
-                <a href="{{ url_for('login') }}">Login</a>
-                {% endif %}
+                <div class="headtext">
+                    <a href="{{ url_for('home') }}">Home</a>
+                    <a href="{{ url_for('recipe') }}">Recipes</a>
+                    <a href="{{ url_for('about') }}">About</a>
+                    <a href="{{ url_for('contact') }}">Contact</a>
 
+                    {% if 'user_id' in session %}
+                    {% if session['is_admin'] %}
+                    <!-- Admin View -->
+                    <a href="{{ url_for('admin_dashboard') }}">Dashboard</a>
+                    <a href="{{ url_for('logout') }}">Logout</a>
+                    {% else %}
+                    <!-- Regular User View -->
+                    <a href="{{ url_for('profile') }}">Profile</a>
+                    <a href="{{ url_for('logout') }}">Logout</a>
+                    {% endif %}
+                    {% else %}
+                    <!-- Not Logged In -->
+                    <a href="{{ url_for('login') }}">Login</a>
+                    {% endif %}
+                </div>
             </nav>
         </div>
     </header>
@@ -63,7 +64,7 @@
                     <a href="#recipes" class="btn">Explore Recipes</a>
                 </div>
             </div>
-            
+
         </section>
 
         <section id="recipes">

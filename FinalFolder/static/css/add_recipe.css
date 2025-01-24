@@ -95,16 +95,16 @@ input[type="text"], textarea, select {
     padding: 15px;
     font-size: 1.1em;
     margin-bottom: 20px;
-    border: 1px solid #ff7f50;
     border-radius: 8px;
     outline: none;
     background: #f1f1f1;
     transition: all 0.3s ease;
+    border: none;
 }
 
 input[type="text"]:focus, textarea:focus, select:focus {
-    border-color: #f09b1b ;
     background: #fff;
+    border: none;
     box-shadow: 0 0 8px rgba(255, 69, 0, 0.3);
 }
 
@@ -161,11 +161,11 @@ select {
 /* Button Style */
 .drag-drop-btn {
     background-color: #ffffff;
-    color: #555;
+    color: #526ba7;
     font-size: 1rem;
     font-weight: bold;
     padding: 10px 20px;
-    border: 2px solid #ccc;
+    border: 2px solid #f09b1b;
     border-radius: 8px;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -175,7 +175,7 @@ select {
 /* Button Hover Effect */
 .drag-drop-btn:hover {
     background-color: #f0f0f0;
-    border-color: #bbb;
+    border-color: #c66d11;
     box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
 }
 

@@ -36,7 +36,8 @@ header {
     color: white;
     padding: 20px 0;
     text-align: center;
-    position: relative;
+    display: inline;
+   /* position: relative;*/
     /* Ensures search bar is positioned correctly */
 }
 
@@ -62,6 +63,14 @@ header .logo-title h1 {
     font-family: 'Gistesy', sans-serif;
     font-size: 2.5rem; /* Adjust font size as needed */
     line-height: 1; /* Ensure vertical alignment */
+}
+
+header nav{
+    display: inline-flex;
+}
+
+.headtext{
+    padding-top: 13px;
 }
 
 header nav a {
@@ -108,61 +117,72 @@ header nav a:hover {
     }
 }
 
-/* Search Icon and Form */
-.search-container {
-    display: flex;
+/* Search Bar Styling */
+.box {
+    position: relative;
+    display: inline-flex;
     align-items: center;
-    position: absolute;
-    top: 20px;
-    /* Position it within the header */
-    right: 20px;
 }
 
-#search-icon {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 5px;
-}
-
-#search-icon img {
-    width: 20px;
-    height: 20px;
-}
-
-/* Search form styling */
-#search-form {
-    display: none;
-    position: absolute;
-    top: 45px;
-    /* Adjust to position below the navbar */
-    right: 20px;
-    background-color: transparent;
-    /* Remove background */
-    border: 1px solid #ff7f50;
-    /* Match navbar color */
+.input {
     padding: 10px;
-    width: 250px;
-    border-radius: 5px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-/* Search Bar Input */
-#search-bar {
-    width: 100%;
-    padding: 8px 15px;
-    font-size: 14px;
-    border: 1px solid #ff7f50;
-    /* Match the color of the navbar */
-    border-radius: 20px;
+    width: 50px; /* Collapsed width */
+    height: 50px;
+    background: #fff;
+    border: 4px solid #fff;
+    border-radius: 50px;
+    box-sizing: border-box;
+    font-size: 18px;
     outline: none;
-    color: #333;
+    transition: width 0.5s ease, background 0.3s ease, text-indent 0.3s ease;
+    text-indent: 50px; /* Push text away to avoid overlap with icon */
 }
 
-#search-bar:focus {
-    border-color: #ff4500;
-    /* Accent color when focused */
+/* Expand input field on hover */
+.box:hover input,
+.input:focus {
+    width: 350px; /* Expanded width */
+    background: #f09b1b;
+    text-indent: 10px; /* Reset text position */
 }
+
+/* Icon Styling */
+.box i {
+    position: absolute;
+    left: 13px;
+    top: 13px;
+    z-index: 2;
+    font-size: 23px;
+    color: #526ba7;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+}
+
+/* Hide icon when input is hovered or focused */
+.box:hover i,
+.input:focus + i {
+    opacity: 0; /* Icon fades out smoothly */
+}
+
+/* Placeholder text styling */
+.input::placeholder {
+    color: transparent; /* Hide placeholder when input is collapsed */
+    transition: color 0.3s ease;
+    font-size: 14px;
+}
+
+/* Show placeholder text when input is expanded */
+.input:focus::placeholder,
+.box:hover .input::placeholder {
+    color: #fff; /* Visible placeholder in expanded state */
+}
+
+/* Text behavior when typing */
+.input:focus {
+    background: #f09b1b; /* Background changes to white */
+    color: #fff; /* Text becomes black */
+}
+
 
 /* Hero Section */
 #home {
@@ -177,8 +197,8 @@ header nav a:hover {
 .hero-section {
     position: relative;
     height: 400px;
-    background: url('/static/images/background.jpg') no-repeat center center/cover;
-}
+  /*  background: url('/static/images/background.jpg') no-repeat center center/cover;
+*/}
 
 .overlay {
     position: absolute;
@@ -203,8 +223,7 @@ header nav a:hover {
 }
 
 .hero-content h2, .hero-content p {
-    color: white; /* Ensures text is readable */
-}
+    color: white; /* Ensures text is readable */}
 
 .hero-content h2 {
     font-size: 3em;
@@ -309,7 +328,7 @@ header nav a:hover {
 .card-buttons .btn-view {
     display: block;
     margin: 10px auto;
-    background: #526ba7; /* Green */
+    background: #526ba7; 
     color: white;
     padding: 10px 15px;
     border-radius: 5px;
@@ -318,7 +337,7 @@ header nav a:hover {
 }
 
 .card-buttons .btn-view:hover {
-    background: #1d365e; /* Darker green */
+    background: #1d365e; 
 }
 
 
@@ -366,26 +385,35 @@ header nav a:hover {
 }
 
 .about-section h2 {
-    font-size: 2.5em;
     margin-bottom: 20px;
-    color: #ff4500;
-    /* Accent color */
+    color: #fff;
+    display: inline-block; 
+    background-color: #f09b1b; 
+    padding: 10px 20px; 
+    font-size: 2em;; 
+    border-radius: 50px;
+    text-align: center; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .about-section p {
     font-size: 1.2em;
     margin-bottom: 20px;
     color: #333;
-    line-height: 1.8;
     max-width: 800px;
     margin: 0 auto;
 }
 
 .about-section h3 {
-    font-size: 2em;
-    margin-top: 30px;
-    color: #ff4500;
-    /* Accent color for section titles */
+    margin-bottom: 20px;
+    color: #fff;
+    display: inline-block; 
+    background-color: #f09b1b; 
+    padding: 10px 20px; 
+    font-size: 1.3em;; 
+    border-radius: 50px;
+    text-align: center; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .about-section ul {
@@ -408,7 +436,7 @@ header nav a:hover {
     /* Adds a checkmark before list items */
     position: absolute;
     left: 0;
-    color: #333;
+    color: #526ba7;
     /* Accent color */
     font-size: 1.5em;
     top: -4px;

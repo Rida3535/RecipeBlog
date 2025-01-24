@@ -160,6 +160,7 @@ def add_recipe():
         flash('Please login to add recipes.', 'warning')
         return redirect(url_for('login'))
     
+    recipe=None
     user = user_repository.get_user_by_id(session['user_id'])
     categories = category_repository.get_all_categories()
 
@@ -218,7 +219,7 @@ def add_recipe():
         flash('Recipe added successfully!', 'success')
         return redirect(url_for('home'))
 
-    return render_template('add_recipe.html', categories=categories)
+    return render_template('add_recipe.html', recipe=recipe, categories=categories)
 
 @app.route('/edit_recipe/<int:recipe_id>', methods=['GET', 'POST'])
 def edit_recipe(recipe_id):

@@ -56,15 +56,21 @@
 
                 <!-- Image Upload Section -->
                 <div class="drag-drop-container" onclick="document.getElementById('image').click()">
-                    <input type="file" id="image" name="image" accept="image/*" style="display: none;"
+                    <input type="file" id="image" name="image" accept="images/*" style="display: none;"
                         onchange="showImagePreview(event)" />
                     <button class="drag-drop-btn" type="button">CHOOSE FILES</button>
                     <span class="drag-drop-text">or drop files here</span>
                 
                     <div class="preview-container">
-                        <img id="preview" src="" alt="Image Preview" style="display: none;" />
-                        <span id="filename" class="filename-text"></span>
+                        {% if recipe and recipe.image %}
+                            <img id="preview" src="{{ url_for('static', filename='images/' + recipe.image) }}" alt="Image Preview" style="display: block;" />
+                            <span id="filename" class="filename-text">{{recipe.image}}</span>
+                        {% else %}
+                            <img id="preview" src="#" alt="Image Preview" style="display: none;" />
+                            <span id="filename" class="filename-text"></span>
+                        {% endif %}
                     </div>
+                    
                 </div>
 
                 <input type="submit" value="{% if recipe %}Update Recipe{% else %}Add Recipe{% endif %}">

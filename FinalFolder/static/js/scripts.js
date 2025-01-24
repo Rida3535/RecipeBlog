@@ -56,32 +56,33 @@ recipes.forEach(recipe => {
     recipeContainer.appendChild(recipeCard);
 });
 
-// Function to toggle the search bar visibility
+// Function to toggle the visibility of the search bar
 function toggleSearchBar() {
-    const searchForm = document.getElementById('search-form');
-    
-    if (searchForm.style.display === 'none' || searchForm.style.display === '') {
-        searchForm.style.display = 'block'; // Show the search bar
+    const searchInput = document.getElementById('search-bar');
+    if (searchInput.style.display === 'none' || searchInput.style.display === '') {
+        searchInput.style.display = 'inline-block'; // Show the search input
+        searchInput.focus();
     } else {
-        searchForm.style.display = 'none'; // Hide the search bar
+        searchInput.style.display = 'none'; // Hide the search input
     }
 }
 
-// Function to filter recipes based on search input
+// Function to filter recipes based on the search input
 function searchRecipes() {
     var input, filter, container, cards, cardTitle, i;
     input = document.getElementById('search-bar');
-    filter = input.value.toLowerCase();
+    filter = input.value.toLowerCase(); // Get search query in lowercase
     container = document.getElementById('recipe-container');
     cards = container.getElementsByClassName('recipe-card');
 
+    // Loop through all recipe cards and display matching ones
     for (i = 0; i < cards.length; i++) {
-        cardTitle = cards[i].getElementsByTagName("h3")[0];
+        cardTitle = cards[i].getElementsByTagName("h3")[0]; // Get the title of each card
         if (cardTitle) {
             if (cardTitle.innerText.toLowerCase().indexOf(filter) > -1) {
-                cards[i].style.display = "";
+                cards[i].style.display = ""; // Show card if it matches
             } else {
-                cards[i].style.display = "none";
+                cards[i].style.display = "none"; // Hide card if it doesn't match
             }
         }
     }
