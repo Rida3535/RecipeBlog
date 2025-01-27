@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Profile</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">
 </head>
+
 <body>
     <!-- Header -->
     <header>
@@ -39,15 +41,21 @@
             <section class="liked-recipes">
                 <h3>Liked Recipes</h3>
                 {% if liked_recipes %}
-                    <ul class="recipe-list">
-                        {% for recipe in liked_recipes %}
-                            <li class="recipe-item">
-                                <a href="{{ url_for('recipe_details', recipe_id=recipe.id) }}">{{ recipe.title }}</a>
-                            </li>
-                        {% endfor %}
-                    </ul>
+                <ul class="recipe-list">
+                    {% for recipe in liked_recipes %}
+                    <li class="recipe-item">
+                        <a href="{{ url_for('recipe_details', recipe_id=recipe.id) }}">{{ recipe.title }}</a>
+
+                        <!-- Unlike button, hidden by default and shown on hover -->
+                        <form action="{{ url_for('unlike_recipe', recipe_id=recipe.id) }}" method="post"
+                            class="unlike-form">
+                            <button type="submit" class="unlike-btn" title="Unlike">❌</button>
+                        </form>
+                    </li>
+                    {% endfor %}
+                </ul>
                 {% else %}
-                    <p class="no-recipes">You haven't liked any recipes yet.</p>
+                <p class="no-recipes">You haven't liked any recipes yet.</p>
                 {% endif %}
             </section>
 
@@ -59,4 +67,5 @@
         <p>&copy; 2024 Recipe Blog. All Rights Reserved.</p>
     </footer>
 </body>
+
 </html>

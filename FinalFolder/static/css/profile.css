@@ -127,6 +127,7 @@ header nav a:hover {
     gap: 20px;
 }
 
+
 .recipe-item {
     background: #f09b1b;
     padding: 15px;
@@ -134,6 +135,7 @@ header nav a:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
 }
+
 
 .recipe-item a {
     text-decoration: none;
@@ -146,6 +148,30 @@ header nav a:hover {
     transform: scale(1.05);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     background: #c66d11;
+}
+
+.unlike-form {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    display: none; /* Initially hidden */
+}
+
+.recipe-item:hover .unlike-form {
+    display: block; /* Show the button when hovering over the recipe */
+}
+
+.unlike-btn {
+    background: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    font-size: 1.2rem;
+}
+
+.unlike-btn:hover {
+    color: grey;
 }
 
 .no-recipes {

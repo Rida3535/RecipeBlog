@@ -295,6 +295,22 @@ def profile():
         liked_recipes=liked_recipes
     )
 
+@app.route('/unlike_recipe/<int:recipe_id>', methods=['POST'])
+def unlike_recipe(recipe_id):
+    if 'user_id' not in session:
+        flash('Please login to perform this action.', 'warning')
+        return redirect(url_for('login'))
+    
+    # Remove the recipe from the liked list for the current user
+    success = user_repository.unlike_recipe(session['user_id'], recipe_id)
+    
+    if success:
+        flash('Recipe removed from your liked recipes.', 'success')
+    else:
+        flash('Failed to remove the recipe.', 'danger')
+    
+    return redirect(url_for('profile'))
+
 # Contact Page Route
 @app.route('/contact', methods=['GET', 'POST'])
 def contact():
