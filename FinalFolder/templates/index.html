@@ -77,7 +77,13 @@
                     {% if 'user_id' in session %}
                     <div class="card-buttons">
                         <a href="{{ url_for('recipe_details', recipe_id=recipe.id) }}" class="btn-view">View Recipe</a>
+                        {% if recipe.id in liked_recipe_id %}
+                        <!-- If the recipe is liked, show "Liked" button -->
+                        <span class="btn-liked">Liked</span>
+                        {% else %}
+                        <!-- Otherwise show the "Like" button -->
                         <a href="{{ url_for('like_recipe', recipe_id=recipe.id) }}" class="btn-like">Like</a>
+                        {% endif %}
                     </div>
                     {% else %}
                     <p><a href="{{ url_for('login') }}">Log in</a> to like this recipe.</p>

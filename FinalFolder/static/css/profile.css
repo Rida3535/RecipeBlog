@@ -129,19 +129,22 @@ header nav a:hover {
 
 
 .recipe-item {
+    position: relative; /* Needed for positioning the unlike-form */
     background: #f09b1b;
     padding: 15px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
+    overflow: hidden; /* Prevents content overflow */
 }
-
 
 .recipe-item a {
     text-decoration: none;
     color: #fff;
     font-size: 1.3em;
-    font-weight:bold;
+    font-weight: bold;
+    display: block; /* Ensures the link is separate from the button */
+    margin-bottom: 10px; /* Adds spacing between the recipe name and the button */
 }
 
 .recipe-item:hover {
@@ -152,27 +155,35 @@ header nav a:hover {
 
 .unlike-form {
     position: absolute;
-    top: 50%;
-    right: 10px;
-    transform: translateY(-50%);
-    display: none; /* Initially hidden */
+    bottom: 10px; /* Position the button below the recipe title */
+    right: 10px; /* Align the button to the bottom-right corner */
+    display: none; /* Hidden by default */
 }
 
 .recipe-item:hover .unlike-form {
-    display: block; /* Show the button when hovering over the recipe */
+    display: block; /* Show on hover */
 }
 
 .unlike-btn {
-    background: none;
+    background: rgb(210, 20, 20);
     border: none;
-    color: #fff;
+    border-radius: 50%;
+    padding: 5px;
     cursor: pointer;
-    font-size: 1.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cross-icon {
+    width: 16px;
+    height: 16px;
 }
 
 .unlike-btn:hover {
-    color: grey;
+    background: rgb(180, 20, 20);
 }
+
 
 .no-recipes {
     font-size: 1.2em;

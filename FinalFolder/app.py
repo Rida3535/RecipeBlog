@@ -29,18 +29,32 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 # Home Page Route - Display all recipes
 @app.route('/')
 def home():
-    recipe = recipe_repository.get_all_recipes()
-    return render_template('index.html', recipes=recipe)
+    if 'user_id' in session:
+        user = user_repository.get_user_by_id(session['user_id'])
+        liked_recipe_id = [recipe.id for recipe in user.liked_recipes]
+    else:
+        liked_recipe_id = []
+
+    recipes = recipe_repository.get_all_recipes()  # Get all recipes
+    return render_template('index.html', recipes=recipes, liked_recipe_id=liked_recipe_id)
+
 
 # Recipe List Route (for listing all recipes or filtering by category)
 @app.route('/recipe', defaults={'category': None})
 @app.route('/recipe/<string:category>')
 def recipe(category):
+    if 'user_id' in session:
+        user = user_repository.get_user_by_id(session['user_id'])
+        liked_recipe_id = [recipe.id for recipe in user.liked_recipes]
+    else:
+        liked_recipe_id = []
+
     if category:
         recipes = Recipe.query.join(Category).filter(Category.name == category).all()
     else:
         recipes = Recipe.query.all()  # Get all recipes without adding any specific text
-    return render_template('recipe.html', recipes=recipes, category=category)
+  
+    return render_template('recipe.html', recipes=recipes, category=category, liked_recipe_id=liked_recipe_id)
 
 # Recipe Detail Route (specific to a single recipe)
 @app.route('/recipe/<int:recipe_id>', methods=['GET'])
@@ -127,14 +141,26 @@ def init_categories():
 @app.route('/like_recipe/<int:recipe_id>')
 def like_recipe(recipe_id):
     if 'user_id' not in session:
-        flash('Please login to like recipes.', 'warning')
-        return redirect(url_for('login')) 
-    is_liked = user_repository.like_recipe(session['user_id'], recipe_id)
-    if is_liked:
-        flash('Recipe liked successfully!', 'success')
+        flash('Please log in to like recipes.', 'warning')
+        return redirect(url_for('login'))
+
+    user = user_repository.get_user_by_id(session['user_id'])
+    recipe = recipe_repository.get_recipe_by_id(recipe_id)
+
+    if not recipe:
+        flash('Recipe not found.', 'danger')
+        return redirect(url_for('home'))
+
+    # Check if the recipe is already liked by the user
+    if recipe not in user.liked_recipes:
+        user.liked_recipes.append(recipe)
+        db.session.commit()
+        flash(f'You liked the recipe "{recipe.title}".', 'success')
     else:
-        flash('You have already liked this recipe or the recipe does not exist.', 'info')
+        flash(f'You have already liked the recipe "{recipe.title}".', 'info')
+
     return redirect(url_for('home'))
+
 
 @app.route('/add_ingredient', methods=['POST'])
 def add_ingredient():
@@ -248,20 +274,31 @@ def edit_recipe(recipe_id):
 
         # Update ingredients
         ingredients_str = request.form['ingredients']
-        recipe.ingredients.clear()  # Remove old ingredients
+        recipe.ingredients.clear()
         ingredients_list = ingredients_str.split(',')
         for ingredient in ingredients_list:
             name_quantity = ingredient.strip().split(':')
             if len(name_quantity) == 2:
                 name = name_quantity[0].strip()
                 quantity = name_quantity[1].strip()
-                ingredient_instance = Ingredient.query.filter_by(name=name).first()
 
+                ingredient_instance = Ingredient.query.filter_by(name=name).first()
                 if not ingredient_instance:
                     ingredient_instance = Ingredient(name=name, quantity=quantity)
                     db.session.add(ingredient_instance)
+                else:
+                    ingredient_instance.quantity = quantity
 
                 recipe.ingredients.append(ingredient_instance)
+
+        # Update image
+        if 'image' in request.files:
+            image_file = request.files['image']
+            if image_file and image_file.filename != '':
+                filename = secure_filename(image_file.filename)
+                image_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+                image_file.save(image_path)
+                recipe.image = filename
 
         # Save changes
         db.session.commit()
@@ -353,8 +390,7 @@ def admin_dashboard():
             return redirect(url_for('admin_dashboard'))
         
         if action == 'edit' and recipe_id:
-            return redirect(url_for('edit_recipe', recipe_id=recipe_id))
-        
+            return redirect(url_for('edit_recipe', recipe_id=recipe_id)) 
     return render_template('admin_dashboard.html', recipes=recipes)
 
 @app.route('/search', methods=['GET'])
