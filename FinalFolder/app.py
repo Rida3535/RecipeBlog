@@ -1,13 +1,14 @@
 from flask import Flask, render_template, request, jsonify, redirect, url_for, flash, session
 from werkzeug.security import generate_password_hash, check_password_hash
-from model import Recipe, User, Category, Ingredient
+from model import Recipe, User, Category, Ingredient, ContactMessage
 from repositories import RecipeRepository, UserRepository, CategoryRepository
-from singleton import RecipeDatabase
-from factories import RecipeFactory
+#from singleton import RecipeDatabase
+#from factories import RecipeFactory
 from database import db
 from flask_migrate import Migrate
 import os
 from werkzeug.utils import secure_filename
+import re
 
 # Initialize Flask app
 app = Flask(__name__)
@@ -309,20 +310,17 @@ def profile():
         flash('Please login to view your profile.', 'warning')
         return redirect(url_for('login'))
     
-    # Fetch user data (username and email) from the database
-    user = user_repository.get_user_by_id(session['user_id'])  # Fetch user by ID
-    
+    user = user_repository.get_user_by_id(session['user_id'])  
+
     if not user:
         flash('User not found.', 'danger')
         return redirect(url_for('login'))
     
-    # Fetch liked recipes for the user
     liked_recipes = user_repository.get_liked_recipes(session['user_id'])
-    
-    # Pass user data and liked recipes to the template
+
     return render_template(
-        'profile.html',
-        username=user.username,  # Access attributes of the User object
+        'profile.html', 
+        username=user.username, 
         email=user.email,
         liked_recipes=liked_recipes
     )
@@ -333,7 +331,6 @@ def unlike_recipe(recipe_id):
         flash('Please login to perform this action.', 'warning')
         return redirect(url_for('login'))
     
-    # Remove the recipe from the liked list for the current user
     success = user_repository.unlike_recipe(session['user_id'], recipe_id)
     
     if success:
@@ -347,16 +344,55 @@ def unlike_recipe(recipe_id):
 @app.route('/contact', methods=['GET', 'POST'])
 def contact():
     if request.method == 'POST':
-        # Handle form submission
-        name = request.form.get('name')
-        email = request.form.get('email')
-        message = request.form.get('message')
+        name = request.form.get('name').strip()
+        email = request.form.get('email').strip()
+        message = request.form.get('message').strip()
 
-        # Optionally store or send the message
-        print(f"Received message from {name} ({email}): {message}")
-        return render_template('contact.html', message="Thank you for reaching out!")
-    
-    return render_template('contact.html')  # Display contact form initially
+        # Validate input
+        if not name or not email or not message:
+            flash("All fields are required!", "danger")
+            return redirect(url_for('contact'))
+
+        # Validate email format
+        email_regex = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
+        if not re.match(email_regex, email):
+            flash("Invalid email format!", "danger")
+            return redirect(url_for('contact'))
+
+        # Save message to the database
+        new_message = ContactMessage(name=name, email=email, message=message)
+        db.session.add(new_message)
+        db.session.commit()
+
+        flash("Thank you for reaching out! We’ll get back to you soon.", "success")
+        return redirect(url_for('contact'))
+
+    return render_template('contact.html')
+
+@app.route('/admin/messages')
+def admin_messages():
+    if 'user_id' not in session or not session.get('is_admin', False):
+        flash("Access denied! Admins only.", "danger")
+        return redirect(url_for('home'))
+
+    messages = ContactMessage.query.order_by(ContactMessage.created_at.desc()).all()
+    return render_template('admin_messages.html', messages=messages)
+
+@app.route('/delete_message/<int:message_id>')
+def delete_message(message_id):
+    message = ContactMessage.query.get_or_404(message_id)
+    db.session.delete(message)
+    db.session.commit()
+    flash("Message deleted successfully!", "success")
+    return redirect(url_for('admin_messages'))
+
+@app.route('/highlight_message/<int:message_id>')
+def highlight_message(message_id):
+    message = ContactMessage.query.get_or_404(message_id)
+    message.highlighted = not message.highlighted  # Toggle highlight status
+    db.session.commit()
+    flash("Message highlight status updated!", "info")
+    return redirect(url_for('admin_messages'))
 
 # Admin Dashboard Route
 @app.route('/admin', methods=['GET', 'POST'])
@@ -365,16 +401,13 @@ def admin_dashboard():
         flash('Please login to access the admin dashboard.', 'warning')
         return redirect(url_for('login'))
 
-    # Check if the user is an admin
     user = user_repository.get_user_by_id(session['user_id'])
     if not user.is_admin:
         flash('Access denied! Admins only.', 'danger')
         return redirect(url_for('home'))
 
-    # Fetch recipes for management
     recipes = recipe_repository.get_all_recipes()
 
-    # Handle recipe deletion (if requested)
     if request.method == 'POST':
         action = request.form.get('action')
         recipe_id = request.form.get('recipe_id')

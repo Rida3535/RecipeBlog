@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us</title>
+    <title>About | Ricette Deliziose</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 
@@ -21,7 +21,6 @@
                 <a href="{{ url_for('home') }}">Home</a>
                 <a href="{{ url_for('recipe') }}">Recipes</a>
                 <a href="{{ url_for('about') }}">About</a>
-                <a href="{{ url_for('contact') }}">Contact</a>
 
                 {% if 'user_id' in session %}
                 {% if session['is_admin'] %}
@@ -30,6 +29,7 @@
                 <a href="{{ url_for('logout') }}">Logout</a>
                 {% else %}
                 <!-- Regular User View -->
+                <a href="{{ url_for('contact') }}">Contact</a>
                 <a href="{{ url_for('profile') }}">Profile</a>
                 <a href="{{ url_for('logout') }}">Logout</a>
                 {% endif %}

@@ -143,8 +143,8 @@ table tbody tr:hover {
 
 /* Button Styles */
 .btn-delete {
-    background: white;
-    color: #ff4500;
+    background: #ff7f50;
+    color: #fff;
     padding: 0.5rem 1rem;
     border: none;
     border-radius: 5px;
@@ -161,8 +161,8 @@ table tbody tr:hover {
 }
 
 .btn-edit {
-    background: white;
-    color: #ff4500;
+    background: #ff7f50;
+    color: #fff;
     padding: 0.5rem 1rem;
     border: none;
     border-radius: 5px;
@@ -172,6 +172,7 @@ table tbody tr:hover {
     align-items: center;
     display: flex;
     margin-left: 9px;
+    margin-top: 4px;
 }
 
 .btn-edit:hover {

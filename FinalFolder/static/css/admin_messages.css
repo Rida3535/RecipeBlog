@@ -1,0 +1,202 @@
+/* admin.css */
+
+/* General Reset */
+body,
+h1,
+h2,
+h3,
+p,
+a {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    text-decoration: none;
+}
+
+/* Body Styling */
+body {
+    line-height: 1.6;
+    color: #333;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('/static/images/bg3.jpg');
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Wrapper for the Content */
+.wrapper {
+    flex: 1;
+    /* This ensures the content takes up the remaining space */
+}
+
+/* Header */
+header {
+    background: #FF6830;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+    display: inline;
+    /* position: relative;*/
+    /* Ensures search bar is positioned correctly */
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 45px;
+}
+
+header .logo-title {
+    display: flex;
+    align-items: center;
+}
+
+header .logo-title .logo {
+    margin-right: 10px; /* Remove any default spacing */
+}
+
+header .logo-title h1 {
+    margin: 0;
+    padding: 0;
+    font-family: 'Gistesy', sans-serif;
+    font-size: 2.5rem; /* Adjust font size as needed */
+    line-height: 1; /* Ensure vertical alignment */
+}
+
+header nav {
+    display: inline-flex;
+}
+
+.headtext {
+    padding-top: 13px;
+}
+
+header nav a {
+    color: white;
+    margin: 0 10px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+header nav a:hover {
+    color: #f8f9fa;
+    text-decoration: underline;
+}
+
+/* Responsive Menu Button */
+.menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    nav {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        right: 20px;
+        background: #ff7f50;
+        padding: 10px;
+        border-radius: 5px;
+        z-index: 10;
+    }
+
+    nav.active {
+        display: flex;
+    }
+
+    .menu-btn {
+        display: block;
+    }
+}
+
+/* Main Content */
+main {
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    margin: 20px auto;
+    max-width: 1200px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Table Styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background: #526ba7;
+    color: white;
+    font-size: 1.1em;
+}
+
+td {
+    color: #333;
+}
+
+tr:hover {
+    background: #f9f9f9;
+}
+
+/* Highlighted Row */
+tr.highlighted {
+    background-color: #fae0b7 !important ; /* Gold background */
+}
+
+/* Buttons */
+.btn-delete {
+    background-color: rgb(210, 20, 20);
+    color: white;
+    padding: 5px 10px;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.btn-delete:hover{
+    background-color: rgb(180, 20, 20);
+}
+
+.btn-highlight {
+    background-color: #f09b1b;
+    color: #fff;
+    padding: 5px 10px;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.btn-highlight:hover {
+    background-color: #c66d11;
+}
+
+/* Footer */
+footer {
+    background: #333;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    margin-top: auto;
+    /* Ensures the footer stays at the bottom */
+}
+
+footer p {
+    font-size: 1em;
+}

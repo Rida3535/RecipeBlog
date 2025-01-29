@@ -21,7 +21,7 @@
             <a href="{{ url_for('home') }}">Home</a>
             <a href="{{ url_for('recipe') }}">Recipes</a>
             <a href="{{ url_for('about') }}">About</a>
-            <a href="{{ url_for('contact') }}">Contact</a>
+            <a href="{{ url_for('profile') }}">Profile</a>
             <a href="{{ url_for('logout') }}">Logout</a>
         </nav>
     </div>
@@ -33,6 +33,7 @@
 
     <section class="admin-actions">
         <a href="{{ url_for('add_recipe') }}" class="btn">Add New Recipe</a>
+        <a href="{{ url_for('admin_messages') }}" class="btn">View Messages</a>
     </section>
 
     <section class="manage-recipes">

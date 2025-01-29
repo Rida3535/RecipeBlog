@@ -3,8 +3,8 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recipe Blog</title>
+    <meta name="e Bloviewport" content="width=device-width, initial-scale=1.0">
+    <title>Ricette Deliziose</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
@@ -32,7 +32,7 @@
                     <a href="{{ url_for('home') }}">Home</a>
                     <a href="{{ url_for('recipe') }}">Recipes</a>
                     <a href="{{ url_for('about') }}">About</a>
-
+                    
                     {% if 'user_id' in session %}
                     {% if session['is_admin'] %}
                     <!-- Admin View -->
