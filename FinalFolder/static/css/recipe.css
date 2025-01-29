@@ -206,6 +206,21 @@ header nav a:hover {
     text-transform: capitalize;
 }
 
+/* Footer */
+footer {
+    background: #333;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    margin-top: 40px;
+    
+}
+
+footer p {
+    font-size: 1em;
+}
+
+
 /* Mobile Responsiveness */
 @media (max-width: 768px) {
     header .container {

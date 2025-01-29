@@ -109,3 +109,20 @@ function showImagePreview(event) {
         reader.readAsDataURL(file);
     }
 }
+
+//like-btn
+function likeRecipe(recipeId) {
+    fetch(`/like_recipe/${recipeId}`, {
+        method: "POST",  // Use POST instead of GET
+        headers: { "X-Requested-With": "XMLHttpRequest" }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            document.getElementById(`like-btn-${recipeId}`).outerHTML = 
+                `<span class="btn-liked">✔️Liked</span>`;
+        } else {
+            alert(data.message);
+        }
+    });
+}

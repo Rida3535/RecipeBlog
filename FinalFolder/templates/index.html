@@ -28,20 +28,20 @@
                     </form>
                 </div>
 
-
                 <div class="headtext">
                     <a href="{{ url_for('home') }}">Home</a>
                     <a href="{{ url_for('recipe') }}">Recipes</a>
                     <a href="{{ url_for('about') }}">About</a>
-                    <a href="{{ url_for('contact') }}">Contact</a>
 
                     {% if 'user_id' in session %}
                     {% if session['is_admin'] %}
                     <!-- Admin View -->
                     <a href="{{ url_for('admin_dashboard') }}">Dashboard</a>
+                    <a href="{{ url_for('profile') }}">Profile</a>
                     <a href="{{ url_for('logout') }}">Logout</a>
                     {% else %}
                     <!-- Regular User View -->
+                    <a href="{{ url_for('contact') }}">Contact</a>
                     <a href="{{ url_for('profile') }}">Profile</a>
                     <a href="{{ url_for('logout') }}">Logout</a>
                     {% endif %}
@@ -61,7 +61,7 @@
                 <div class="hero-content">
                     <h2>Your Ultimate Recipe Destination</h2>
                     <p>Discover and cook your favorite dishes in style.</p>
-                    <a href="#recipes" class="btn">Explore Recipes</a>
+                    <a href="recipe" class="btn">Explore Recipes</a>
                 </div>
             </div>
 
@@ -76,13 +76,14 @@
                     <h3>{{ recipe.title }}</h3>
                     {% if 'user_id' in session %}
                     <div class="card-buttons">
-                        <a href="{{ url_for('recipe_details', recipe_id=recipe.id) }}" class="btn-view">View Recipe</a>
+                        <a href="{{ url_for('recipe_details', recipe_id=recipe.id) }}" class="btn-view">View Recipe</a> 
                         {% if recipe.id in liked_recipe_id %}
-                        <!-- If the recipe is liked, show "Liked" button -->
-                        <span class="btn-liked">Liked</span>
+                        <span class="btn-liked" id="like-btn-{{ recipe.id }}">✔️Liked</span>
                         {% else %}
-                        <!-- Otherwise show the "Like" button -->
-                        <a href="{{ url_for('like_recipe', recipe_id=recipe.id) }}" class="btn-like">Like</a>
+                        <a href="javascript:void(0);" class="btn-like" id="like-btn-{{ recipe.id }}"
+                            onclick="likeRecipe('{{ recipe.id }}')">
+                            Like
+                        </a>
                         {% endif %}
                     </div>
                     {% else %}

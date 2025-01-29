@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, session
+from flask import Flask, render_template, request, jsonify, redirect, url_for, flash, session
 from werkzeug.security import generate_password_hash, check_password_hash
 from model import Recipe, User, Category, Ingredient
 from repositories import RecipeRepository, UserRepository, CategoryRepository
@@ -126,7 +126,7 @@ def logout():
 @app.before_request
 def init_categories():
     # Check if the categories already exist; if not, insert them
-    if Category.query.count() == 0:  # Only add if the category table is empty
+    if Category.query.count() == 0: 
         category1 = Category(name="Appetizer")
         category2 = Category(name="Main Course")
         category3 = Category(name="Dessert")
@@ -138,28 +138,24 @@ def init_categories():
         print("Categories added to the database.")
 
 # Like a Recipe Route
-@app.route('/like_recipe/<int:recipe_id>')
+@app.route('/like_recipe/<int:recipe_id>', methods=['POST'])
 def like_recipe(recipe_id):
     if 'user_id' not in session:
-        flash('Please log in to like recipes.', 'warning')
-        return redirect(url_for('login'))
+        return jsonify({"success": False, "message": "Please log in to like recipes."})
 
     user = user_repository.get_user_by_id(session['user_id'])
     recipe = recipe_repository.get_recipe_by_id(recipe_id)
 
     if not recipe:
-        flash('Recipe not found.', 'danger')
-        return redirect(url_for('home'))
+        return jsonify({"success": False, "message": "Recipe not found."})
 
     # Check if the recipe is already liked by the user
     if recipe not in user.liked_recipes:
         user.liked_recipes.append(recipe)
         db.session.commit()
-        flash(f'You liked the recipe "{recipe.title}".', 'success')
+        return jsonify({"success": True, "message": f'You liked the recipe "{recipe.title}".'})
     else:
-        flash(f'You have already liked the recipe "{recipe.title}".', 'info')
-
-    return redirect(url_for('home'))
+        return jsonify({"success": False, "message": f'You have already liked the recipe "{recipe.title}".'})
 
 
 @app.route('/add_ingredient', methods=['POST'])
@@ -174,7 +170,6 @@ def add_ingredient():
     db.session.commit()
 
     return f"Ingredient {ingredient.name} added successfully!"
-
 
 # Helper function to check allowed file types
 def allowed_file(filename):
@@ -212,7 +207,7 @@ def add_recipe():
             filename = secure_filename(image.filename)
             image.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         else:
-            filename = 'default_image.jpg'  # Default image if no valid file is uploaded
+            filename = 'default_image.jpg'  
 
         # Create the Recipe object
         recipe = Recipe(
@@ -220,7 +215,7 @@ def add_recipe():
             description=description,
             instructions=instructions,
             category_id=category.id,
-            image=filename  # Save filename in the database
+            image=filename 
         )
 
         # Add ingredients

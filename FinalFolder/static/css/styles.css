@@ -330,6 +330,7 @@ header nav a:hover {
     border-radius: 5px;
     transition: background 0.3s ease;
     text-align: center;
+    font-weight: bolder;
 }
 
 .card-buttons .btn-liked:hover {

@@ -38,11 +38,10 @@ class UserRepository:
         return False
 
     def get_liked_recipes(self, user_id):
-        user = self.get_user_by_id(user_id)  # Get user by ID
+        user = self.get_user_by_id(user_id) 
         if user:
-            return user.liked_recipes  # Return the list of liked recipes
-        return []  # Return an empty list if user not found
-    
+            return user.liked_recipes  
+        return [] 
     def unlike_recipe(self, user_id, recipe_id):
         user = self.get_user_by_id(user_id)
         recipe = Recipe.query.get(recipe_id)
