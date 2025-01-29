@@ -29,18 +29,13 @@ class UserRepository:
         db.session.commit()
 
     def like_recipe(self, user_id, recipe_id):
-        user = self.get_user_by_id(user_id)  
-        recipe = Recipe.query.get(recipe_id)  
-        if user and recipe:
-            # Check if the user has already liked the recipe (using the `user_likes` association table)
-            if recipe in user.liked_recipes:
-                return False  # User has already liked this recipe, so no action is performed
-        
-            # Add the recipe to the user's liked_recipes
+        user = self.get_user_by_id(user_id)
+        recipe = Recipe.query.get(recipe_id)
+        if recipe not in user.liked_recipes:
             user.liked_recipes.append(recipe)
-            db.session.commit()  
-            return True  # Successfully liked the recipe
-        return False  # User or recipe not found
+            db.session.commit()
+            return True
+        return False
 
     def get_liked_recipes(self, user_id):
         user = self.get_user_by_id(user_id)  # Get user by ID
@@ -49,27 +44,13 @@ class UserRepository:
         return []  # Return an empty list if user not found
     
     def unlike_recipe(self, user_id, recipe_id):
-        try:
-            user = self.get_user_by_id(user_id)  # Get user by ID
-            recipe = Recipe.query.get(recipe_id)  # Get recipe by ID
-     
-            if user and recipe:
-                # Check if the recipe is in the user's liked recipes
-                if recipe in user.liked_recipes:
-                    user.liked_recipes.remove(recipe)  # Remove recipe from liked list
-                    db.session.commit()  # Commit the change to the database
-                    print(f"Recipe ID {recipe_id} successfully unliked by User ID {user_id}.")
-                    return True
-                else:
-                    print(f"User ID {user_id} has not liked Recipe ID {recipe_id}.")
-                    return False
-            else:
-                print(f"User or Recipe not found.")
-                return False
-        except Exception as e:
-            print(f"Error unliking recipe: {e}")
-            return False
-
+        user = self.get_user_by_id(user_id)
+        recipe = Recipe.query.get(recipe_id)
+        if recipe in user.liked_recipes:
+            user.liked_recipes.remove(recipe)
+            db.session.commit()
+            return True
+        return False
 
 # Category Repository
 class CategoryRepository:

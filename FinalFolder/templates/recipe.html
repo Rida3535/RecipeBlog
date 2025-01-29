@@ -78,7 +78,7 @@
                     <span class="btn-liked">Liked</span>
                     {% else %}
                     <!-- Otherwise show the "Like" button -->
-                    <a href="{{ url_for('like_recipe', recipe_id=recipe.id) }}" class="btn-like">Like</a>
+                    <a method="post", href="{{ url_for('like_recipe', recipe_id=recipe.id) }}" class="btn-like">Like</a>
                     {% endif %}
                 </div>
             </div>
