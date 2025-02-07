@@ -419,15 +419,6 @@ def admin_dashboard():
             return redirect(url_for('edit_recipe', recipe_id=recipe_id)) 
     return render_template('admin_dashboard.html', recipes=recipes)
 
-@app.route('/search', methods=['GET'])
-def search():
-    query = request.args.get('query')
-    if query:
-        recipes = Recipe.query.filter(Recipe.title.ilike(f'%{query}%')).all()
-    else:
-        recipes = Recipe.query.all()
-    return render_template('search_results.html', recipes=recipes)
-
 # Create Database and Tables (run once when starting the app)
 with app.app_context():
     db.create_all()
