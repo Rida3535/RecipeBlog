@@ -2,8 +2,6 @@ from flask import Flask, render_template, request, jsonify, redirect, url_for, f
 from werkzeug.security import generate_password_hash, check_password_hash
 from model import Recipe, User, Category, Ingredient, ContactMessage
 from repositories import RecipeRepository, UserRepository, CategoryRepository
-#from singleton import RecipeDatabase
-#from factories import RecipeFactory
 from database import db
 from flask_migrate import Migrate
 import os
