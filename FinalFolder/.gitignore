@@ -1,0 +1,26 @@
+# Virtual environment
+env/
+venv/
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Environment variables
+.env
+
+# VS Code
+.vscode/
+
+# macOS
+.DS_Store
+
+# Flask database (if using SQLite)
+instance/*.db
+
+# Pytest cache
+.pytest_cache/
+
+# Coverage reports
+.coverage
+htmlcov/
