@@ -10,8 +10,8 @@ body, h1, h2, h3, p, a {
 /* Body Styling */
 body {
     line-height: 1.6;
-    color: #333;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('/static/images/bg3.jpg');
+    color: var(--text-primary);
+    background-image: var(--bg-overlay), url('/static/images/bg3.jpg');
     background-size: cover;
     display: flex;
     flex-direction: column;
@@ -20,16 +20,16 @@ body {
 
 /* Wrapper for the Content */
 .wrapper {
-    flex: 1; /* This ensures the content takes up the remaining space */
+    flex: 1;
 }
 
 /* Header */
 header {
-    background: #FF6830;
+    background: var(--header-gradient);
     color: white;
     padding: 20px 0;
     text-align: center;
-    position: relative; /* Ensures search bar is positioned correctly */
+    position: relative;
 }
 
 header .container {
@@ -45,15 +45,20 @@ header .logo-title {
 }
 
 header .logo-title .logo {
-    margin-right: 10px; /* Remove any default spacing */
+    margin-right: 10px;
 }
 
 header .logo-title h1 {
     margin: 0;
     padding: 0;
     font-family: 'Gistesy', sans-serif;
-    font-size: 2.5rem; /* Adjust font size as needed */
-    line-height: 1; /* Ensure vertical alignment */
+    font-size: 2.5rem;
+    line-height: 1;
+}
+
+header nav {
+    display: inline-flex;
+    align-items: center;
 }
 
 header nav a {
@@ -82,12 +87,13 @@ header nav a:hover {
 .profile-container {
     width: 90%;
     max-width: 1000px;
-    background: white;
+    background: var(--bg-card);
     padding: 30px;
     margin: 30px auto;
     border-radius: 10px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 16px var(--shadow-color);
     text-align: center;
+    transition: var(--theme-transition);
 }
 
 .profile-card {
@@ -98,25 +104,26 @@ header nav a:hover {
     width: 120px;
     height: 120px;
     border-radius: 50%;
-    border: 3px solid #ff7f50;
+    border: 3px solid var(--accent-orange);
     margin-bottom: 15px;
+    object-fit: cover;
 }
 
 .profile-card h2 {
     font-size: 2em;
-    color: #333;
+    color: var(--text-primary);
 }
 
 .profile-card .email {
-    font-size: 0.9em;
-    color: #333;
+    font-size: 0.95rem;
+    color: var(--text-secondary);
 }
 
 /* Liked Recipes Section */
 .liked-recipes h3 {
     font-size: 2em;
     margin-bottom: 20px;
-    color: #526ba7;
+    color: var(--accent-blue);
 }
 
 .recipe-list {
@@ -127,15 +134,15 @@ header nav a:hover {
     gap: 20px;
 }
 
-
 .recipe-item {
-    position: relative; /* Needed for positioning the unlike-form */
-    background: #f09b1b;
-    padding: 15px;
+    position: relative;
+    background: var(--btn-gradient);
+    padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px var(--shadow-color);
     text-align: center;
-    overflow: hidden; /* Prevents content overflow */
+    overflow: hidden;
+    transition: transform 0.3s ease, var(--theme-transition);
 }
 
 .recipe-item a {
@@ -143,51 +150,52 @@ header nav a:hover {
     color: #fff;
     font-size: 1.3em;
     font-weight: bold;
-    display: block; /* Ensures the link is separate from the button */
-    margin-bottom: 10px; /* Adds spacing between the recipe name and the button */
+    display: block;
+    margin-bottom: 10px;
 }
 
 .recipe-item:hover {
     transform: scale(1.05);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    background: #c66d11;
+    box-shadow: 0 8px 16px var(--shadow-heavy);
+    background: var(--btn-gradient-hover);
 }
 
 .unlike-form {
     position: absolute;
-    bottom: 10px; /* Position the button below the recipe title */
-    right: 10px; /* Align the button to the bottom-right corner */
-    display: none; /* Hidden by default */
+    bottom: 10px;
+    right: 10px;
+    display: none;
 }
 
 .recipe-item:hover .unlike-form {
-    display: block; /* Show on hover */
+    display: block;
 }
 
 .unlike-btn {
     background: rgb(210, 20, 20);
     border: none;
     border-radius: 50%;
-    padding: 5px;
+    padding: 6px;
     cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: background-color 0.2s;
 }
 
 .cross-icon {
     width: 16px;
     height: 16px;
+    fill: white;
 }
 
 .unlike-btn:hover {
     background: rgb(180, 20, 20);
 }
 
-
 .no-recipes {
     font-size: 1.2em;
-    color: #777;
+    color: var(--text-muted);
 }
 
 /* Button Styles */
@@ -197,26 +205,29 @@ header nav a:hover {
     padding: 10px 20px;
     font-size: 1em;
     color: white;
-    background: #ff7f50;
+    background: var(--btn-gradient);
     text-decoration: none;
-    border-radius: 5px;
-    transition: background 0.3s ease;
+    border-radius: 25px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(255, 104, 48, 0.3);
 }
 
 .btn:hover {
-    background: #ff4500;
+    background: var(--btn-gradient-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(255, 104, 48, 0.4);
 }
 
 /* Footer */
 footer {
-    background: #333;
-    color: white;
+    background: var(--footer-bg);
+    color: var(--footer-text);
     text-align: center;
     padding: 10px;
-    margin-top: auto; /* Ensures the footer stays at the bottom */
+    margin-top: auto;
 }
 
 footer p {
     font-size: 1em;
 }
-

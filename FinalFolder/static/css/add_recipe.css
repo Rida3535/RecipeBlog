@@ -1,3 +1,5 @@
+@import url('https://fonts.cdnfonts.com/css/gistesy');
+
 /* General Reset */
 body, h1, h2, h3, p, a, input, textarea, select {
     margin: 0;
@@ -8,8 +10,8 @@ body, h1, h2, h3, p, a, input, textarea, select {
 /* Body Styling */
 body {
     line-height: 1.6;
-    color: #333;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('/static/images/bg3.jpg');
+    color: var(--text-primary);
+    background-image: var(--bg-overlay), url('/static/images/bg3.jpg');
     background-size: cover;
     display: flex;
     flex-direction: column;
@@ -23,7 +25,7 @@ body {
 
 /* Header Styling */
 header {
-    background: #FF6830;
+    background: var(--header-gradient);
     color: white;
     padding: 20px 0;
     text-align: center;
@@ -43,15 +45,20 @@ header .logo-title {
 }
 
 header .logo-title .logo {
-    margin-right: 10px; /* Remove any default spacing */
+    margin-right: 10px;
 }
 
 header .logo-title h1 {
     margin: 0;
     padding: 0;
     font-family: 'Gistesy', sans-serif;
-    font-size: 2.5rem; /* Adjust font size as needed */
-    line-height: 1; /* Ensure vertical alignment */
+    font-size: 2.5rem;
+    line-height: 1;
+}
+
+header nav {
+    display: inline-flex;
+    align-items: center;
 }
 
 header nav a {
@@ -70,61 +77,66 @@ header nav a:hover {
 .form-container {
     max-width: 800px;
     margin: 40px auto;
-    background: white;
+    background: var(--bg-card);
     padding: 40px 30px;
     border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 30px var(--shadow-heavy);
+    transition: var(--theme-transition);
 }
 
 /* Form Heading */
 .form-container h1 {
-    margin-bottom: 20px;
-    margin-top: 20px;
+    margin-bottom: 25px;
+    margin-top: 10px;
     color: #fff;
-    background-color: #f09b1b; 
+    background: var(--btn-gradient); 
     padding: 10px 20px; 
     font-size: 2em; 
     border-radius: 50px;
     text-align: center; 
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px var(--shadow-color);
 }
 
 /* Form Inputs */
 input[type="text"], textarea, select {
-    width: 96%;
+    width: 100%;
     padding: 15px;
     font-size: 1.1em;
     margin-bottom: 20px;
     border-radius: 8px;
     outline: none;
-    background: #f1f1f1;
-    transition: all 0.3s ease;
-    border: none;
+    background: var(--input-bg);
+    border: 2px solid var(--input-border);
+    color: var(--text-primary);
+    transition: var(--theme-transition);
 }
 
 input[type="text"]:focus, textarea:focus, select:focus {
-    background: #fff;
-    border: none;
-    box-shadow: 0 0 8px rgba(255, 69, 0, 0.3);
+    background: var(--bg-primary);
+    border-color: var(--input-focus-border);
+    box-shadow: 0 0 8px var(--input-focus-shadow);
 }
 
 /* Button Styling */
 input[type="submit"] {
-    background: #526ba7;
+    background: var(--btn-gradient);
     color: white;
     border: none;
     padding: 15px 25px;
     font-size: 1.2em;
-    border-radius: 8px;
+    font-weight: 700;
+    border-radius: 25px;
     cursor: pointer;
-    transition: background 0.3s ease, transform 0.3s ease;
+    transition: all 0.3s ease;
     width: 100%;
     margin-top: 20px;
+    box-shadow: 0 4px 12px rgba(255, 104, 48, 0.3);
 }
 
 input[type="submit"]:hover {
-    background: #1d365e;
-    transform: translateY(-3px);
+    background: var(--btn-gradient-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(255, 104, 48, 0.45);
 }
 
 /* Label Styling */
@@ -133,6 +145,7 @@ label {
     font-weight: 500;
     margin-bottom: 8px;
     display: block;
+    color: var(--text-primary);
 }
 
 /* Textarea Styling */
@@ -143,47 +156,50 @@ textarea {
 select {
     width: 100%; 
 }
+
 /* Outer Container */
 .drag-drop-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: white;
+    background: var(--bg-secondary);
     padding: 20px 40px;
     border-radius: 20px;
-    box-shadow: 0px 15px 25px rgba(0, 0, 0, 0.1);
+    border: 2px dashed var(--border-color);
+    box-shadow: 0px 15px 25px var(--shadow-color);
     max-width: 350px;
     margin: auto;
     font-family: 'Poppins', sans-serif;
+    transition: var(--theme-transition);
 }
 
 /* Button Style */
 .drag-drop-btn {
-    background-color: #ffffff;
-    color: #526ba7;
+    background-color: var(--bg-primary);
+    color: var(--accent-blue);
     font-size: 1rem;
     font-weight: bold;
     padding: 10px 20px;
-    border: 2px solid #f09b1b;
+    border: 2px solid var(--accent-gold);
     border-radius: 8px;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px var(--shadow-color);
 }
 
 /* Button Hover Effect */
 .drag-drop-btn:hover {
-    background-color: #f0f0f0;
-    border-color: #c66d11;
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+    background-color: var(--bg-secondary);
+    border-color: var(--accent-orange);
+    box-shadow: 0 6px 10px var(--shadow-color);
 }
 
 /* Text Below Button */
 .drag-drop-text {
     margin-top: 10px;
     font-size: 0.9rem;
-    color: #888;
+    color: var(--text-muted);
     font-style: italic;
 }
 
@@ -195,7 +211,7 @@ select {
 #preview {
     max-width: 100%;
     max-height: 200px;
-    border: 1px solid #ddd;
+    border: 1px solid var(--border-color);
     border-radius: 5px;
 }
 
@@ -203,7 +219,7 @@ select {
     font-style: italic;
     display: block;
     font-size: 14px;
-    color: #333;
+    color: var(--text-primary);
     margin-top: 5px;
 }
 
@@ -228,7 +244,6 @@ select {
         margin: 5px 0;
     }
 
-    /* Aligning the form inputs and buttons properly */
     .form-container input[type="submit"] {
         width: 100%;
     }
@@ -240,20 +255,13 @@ select {
 
 /* Footer */
 footer {
-    background: #333;
-    color: white;
+    background: var(--footer-bg);
+    color: var(--footer-text);
     text-align: center;
     padding: 10px;
-    margin-top: auto; /* Ensures the footer stays at the bottom */
+    margin-top: auto;
 }
 
 footer p {
     font-size: 1em;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .profile-container {
-        padding: 20px;
-    }
 }

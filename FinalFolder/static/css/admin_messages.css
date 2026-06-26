@@ -1,4 +1,5 @@
 /* admin.css */
+@import url('https://fonts.cdnfonts.com/css/gistesy');
 
 /* General Reset */
 body,
@@ -16,8 +17,8 @@ a {
 /* Body Styling */
 body {
     line-height: 1.6;
-    color: #333;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('/static/images/bg3.jpg');
+    color: var(--text-primary);
+    background-image: var(--bg-overlay), url('/static/images/bg3.jpg');
     background-size: cover;
     display: flex;
     flex-direction: column;
@@ -27,18 +28,15 @@ body {
 /* Wrapper for the Content */
 .wrapper {
     flex: 1;
-    /* This ensures the content takes up the remaining space */
 }
 
 /* Header */
 header {
-    background: #FF6830;
+    background: var(--header-gradient);
     color: white;
     padding: 20px 0;
     text-align: center;
-    display: inline;
-    /* position: relative;*/
-    /* Ensures search bar is positioned correctly */
+    position: relative;
 }
 
 header .container {
@@ -54,19 +52,20 @@ header .logo-title {
 }
 
 header .logo-title .logo {
-    margin-right: 10px; /* Remove any default spacing */
+    margin-right: 10px;
 }
 
 header .logo-title h1 {
     margin: 0;
     padding: 0;
     font-family: 'Gistesy', sans-serif;
-    font-size: 2.5rem; /* Adjust font size as needed */
-    line-height: 1; /* Ensure vertical alignment */
+    font-size: 2.5rem;
+    line-height: 1;
 }
 
 header nav {
     display: inline-flex;
+    align-items: center;
 }
 
 .headtext {
@@ -120,81 +119,166 @@ header nav a:hover {
 /* Main Content */
 main {
     padding: 20px;
-    background: rgba(255, 255, 255, 0.9);
+    background: var(--bg-card);
     border-radius: 10px;
     margin: 20px auto;
+    width: 90%;
     max-width: 1200px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px var(--shadow-color);
+    transition: var(--theme-transition);
 }
 
 /* Table Styling */
 table {
     width: 100%;
     border-collapse: collapse;
-    background: white;
+    background: var(--bg-card);
     border-radius: 10px;
     overflow: hidden;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px var(--shadow-color);
+    color: var(--text-primary);
+    transition: var(--theme-transition);
 }
 
 th, td {
     padding: 12px;
     text-align: center;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid var(--border-color);
 }
 
 th {
-    background: #526ba7;
+    background: var(--table-header-bg);
     color: white;
     font-size: 1.1em;
 }
 
 td {
-    color: #333;
+    color: var(--text-primary);
 }
 
 tr:hover {
-    background: #f9f9f9;
+    background: var(--table-hover-row);
 }
 
 /* Highlighted Row */
 tr.highlighted {
-    background-color: #fae0b7 !important ; /* Gold background */
+    background-color: var(--table-hover-row) !important;
+    font-weight: bold;
 }
 
 /* Buttons */
 .btn-delete {
     background-color: rgb(210, 20, 20);
     color: white;
-    padding: 5px 10px;
+    padding: 6px 12px;
     text-decoration: none;
-    border-radius: 5px;
+    border-radius: 25px;
+    font-weight: 600;
+    transition: background-color 0.2s;
+    display: inline-block;
 }
 
-.btn-delete:hover{
+.btn-delete:hover {
     background-color: rgb(180, 20, 20);
 }
 
 .btn-highlight {
-    background-color: #f09b1b;
+    background: var(--btn-gradient);
     color: #fff;
-    padding: 5px 10px;
+    padding: 6px 12px;
     text-decoration: none;
-    border-radius: 5px;
+    border-radius: 25px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: inline-block;
 }
 
 .btn-highlight:hover {
-    background-color: #c66d11;
+    background: var(--btn-gradient-hover);
+}
+
+/* Flash Message Styling */
+.alert {
+    padding: 15px;
+    margin: 10px auto;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    text-align: center;
+    position: relative;
+    box-shadow: 0px 4px 6px var(--shadow-color);
+    transition: opacity 0.5s ease-in-out, transform 0.3s ease-in-out;
+}
+
+/* Success Message */
+.alert-success {
+    background-color: var(--alert-success-bg);
+    border-left: 5px solid var(--alert-success-border);
+    color: var(--alert-success-text);
+}
+
+/* Error Message */
+.alert-danger {
+    background-color: var(--alert-danger-bg);
+    border-left: 5px solid var(--alert-danger-border);
+    color: var(--alert-danger-text);
+}
+
+/* Warning Message */
+.alert-warning {
+    background-color: var(--alert-warning-bg);
+    border-left: 5px solid var(--alert-warning-border);
+    color: var(--alert-warning-text);
+}
+
+/* Info Message */
+.alert-info {
+    background-color: var(--alert-info-bg);
+    border-left: 5px solid var(--alert-info-border);
+    color: var(--alert-info-text);
+}
+
+/* Fade-in Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Fade-out Animation */
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+/* Apply Fade-in to Messages */
+.alert {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Auto-dismiss messages after 5 seconds */
+.alert-dismissible {
+    animation: fadeOut 0.5s ease-in-out 5s forwards;
 }
 
 /* Footer */
 footer {
-    background: #333;
-    color: white;
+    background: var(--footer-bg);
+    color: var(--footer-text);
     text-align: center;
     padding: 10px;
     margin-top: auto;
-    /* Ensures the footer stays at the bottom */
 }
 
 footer p {

@@ -26,7 +26,7 @@ class User(db.Model):
     is_admin = db.Column(db.Boolean, default=False)
 
     # Many-to-Many relationship with Recipe through the 'user_likes' table
-    liked_recipes = db.relationship('Recipe', secondary=user_likes, backref='liked_by', lazy='dynamic')
+    liked_recipes = db.relationship('Recipe', secondary=user_likes, backref='liked_by', lazy='select')
 
     def __repr__(self):
         return f'<User {self.username}>'

@@ -28,11 +28,13 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 # Home Page Route - Display all recipes
 @app.route('/')
 def home():
+    liked_recipe_id = []
     if 'user_id' in session:
         user = user_repository.get_user_by_id(session['user_id'])
-        liked_recipe_id = [recipe.id for recipe in user.liked_recipes]
-    else:
-        liked_recipe_id = []
+        if user:
+            liked_recipe_id = [recipe.id for recipe in user.liked_recipes]
+        else:
+            session.pop('user_id', None)
 
     recipes = recipe_repository.get_all_recipes()  # Get all recipes
     return render_template('index.html', recipes=recipes, liked_recipe_id=liked_recipe_id)
@@ -42,11 +44,13 @@ def home():
 @app.route('/recipe', defaults={'category': None})
 @app.route('/recipe/<string:category>')
 def recipe(category):
+    liked_recipe_id = []
     if 'user_id' in session:
         user = user_repository.get_user_by_id(session['user_id'])
-        liked_recipe_id = [recipe.id for recipe in user.liked_recipes]
-    else:
-        liked_recipe_id = []
+        if user:
+            liked_recipe_id = [recipe.id for recipe in user.liked_recipes]
+        else:
+            session.pop('user_id', None)
 
     if category:
         recipes = Recipe.query.join(Category).filter(Category.name == category).all()
@@ -99,42 +103,24 @@ def login():
         password = request.form['password']
         
         user = user_repository.get_user_by_email(email.lower())
-        print(f"User found: {user}") 
-        print(f"Email entered: {email.strip()}")
+        
         if user:
-         print(f"User: {user.username}, is_admin: {user.is_admin}")
-        if check_password_hash(user.password, password):
-            session['user_id'] = user.id
-            session['is_admin'] = user.is_admin
-            print(f"Session after login: {session}")
-            flash('Login successfull!', 'success')
-            return redirect(url_for('home'))
+            if check_password_hash(user.password, password):
+                session['user_id'] = user.id
+                session['is_admin'] = user.is_admin
+                return redirect(url_for('home'))
+            else:
+                flash('Login failed! Incorrect password.', 'danger')
         else:
-            flash('Login failed! Incorrect password.', 'danger')
-    else:
-        flash('Login failed! No user found with that email.', 'danger')
+            flash('Login failed! No user found with that email.', 'danger')
+    
     return render_template('login.html')
 
 # Logout Route
 @app.route('/logout')
 def logout():
     session.pop('user_id', None)
-    flash('Logged out successfully!', 'success')
     return redirect(url_for('home'))
-
-@app.before_request
-def init_categories():
-    # Check if the categories already exist; if not, insert them
-    if Category.query.count() == 0: 
-        category1 = Category(name="Appetizer")
-        category2 = Category(name="Main Course")
-        category3 = Category(name="Dessert")
-        category4 = Category(name="Drinks")
-
-        # Add categories to session
-        db.session.add_all([category1, category2, category3, category4])
-        db.session.commit()
-        print("Categories added to the database.")
 
 # Like a Recipe Route
 @app.route('/like_recipe/<int:recipe_id>', methods=['POST'])
@@ -143,6 +129,10 @@ def like_recipe(recipe_id):
         return jsonify({"success": False, "message": "Please log in to like recipes."})
 
     user = user_repository.get_user_by_id(session['user_id'])
+    if not user:
+        session.pop('user_id', None)
+        return jsonify({"success": False, "message": "Please log in to like recipes."})
+
     recipe = recipe_repository.get_recipe_by_id(recipe_id)
 
     if not recipe:
@@ -174,6 +164,7 @@ def add_ingredient():
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+# Add Recipe Route
 @app.route('/add_recipe', methods=['GET', 'POST'])
 def add_recipe():
     if 'user_id' not in session:
@@ -182,6 +173,11 @@ def add_recipe():
     
     recipe=None
     user = user_repository.get_user_by_id(session['user_id'])
+    if not user:
+        session.pop('user_id', None)
+        flash('Please login to add recipes.', 'warning')
+        return redirect(url_for('login'))
+
     categories = category_repository.get_all_categories()
 
     if not user.is_admin:
@@ -241,20 +237,20 @@ def add_recipe():
 
     return render_template('add_recipe.html', recipe=recipe, categories=categories)
 
+# Edit Recipe Route
 @app.route('/edit_recipe/<int:recipe_id>', methods=['GET', 'POST'])
 def edit_recipe(recipe_id):
     if 'user_id' not in session:
-        flash('Please login to edit recipes.', 'warning')
         return redirect(url_for('login'))
     
     user = user_repository.get_user_by_id(session['user_id'])
-    if not user.is_admin:
-        flash('Only the admin can edit recipes.', 'danger')
+    if not user or not user.is_admin:
+        if not user:
+            session.pop('user_id', None)
         return redirect(url_for('home'))
 
     recipe = recipe_repository.get_recipe_by_id(recipe_id)
     if not recipe:
-        flash('Recipe not found.', 'danger')
         return redirect(url_for('admin_dashboard'))
 
     categories = category_repository.get_all_categories()
@@ -301,17 +297,16 @@ def edit_recipe(recipe_id):
 
     return render_template('add_recipe.html', recipe=recipe, categories=categories)
 
-# User Profile (View liked recipes)
+# User Profile 
 @app.route('/profile')
 def profile():
     if 'user_id' not in session:
-        flash('Please login to view your profile.', 'warning')
         return redirect(url_for('login'))
     
     user = user_repository.get_user_by_id(session['user_id'])  
 
     if not user:
-        flash('User not found.', 'danger')
+        session.pop('user_id', None)
         return redirect(url_for('login'))
     
     liked_recipes = user_repository.get_liked_recipes(session['user_id'])
@@ -323,50 +318,49 @@ def profile():
         liked_recipes=liked_recipes
     )
 
+#Unlike Recipe Route
 @app.route('/unlike_recipe/<int:recipe_id>', methods=['POST'])
 def unlike_recipe(recipe_id):
-    if 'user_id' not in session:
-        flash('Please login to perform this action.', 'warning')
+    if not session.get('user_id'):
         return redirect(url_for('login'))
-    
-    success = user_repository.unlike_recipe(session['user_id'], recipe_id)
-    
-    if success:
-        flash('Recipe removed from your liked recipes.', 'success')
-    else:
-        flash('Failed to remove the recipe.', 'danger')
-    
+
+    user_repository.unlike_recipe(session['user_id'], recipe_id)
     return redirect(url_for('profile'))
 
 # Contact Page Route
 @app.route('/contact', methods=['GET', 'POST'])
 def contact():
     if request.method == 'POST':
-        name = request.form.get('name').strip()
-        email = request.form.get('email').strip()
-        message = request.form.get('message').strip()
+        name = request.form.get('name', '').strip()
+        email = request.form.get('email', '').strip()
+        message = request.form.get('message', '').strip()
 
-        # Validate input
-        if not name or not email or not message:
+        # Validate fields
+        if not all([name, email, message]):
             flash("All fields are required!", "danger")
             return redirect(url_for('contact'))
 
-        # Validate email format
-        email_regex = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
-        if not re.match(email_regex, email):
-            flash("Invalid email format!", "danger")
+        if not re.match(r'^[\w\.-]+@[\w\.-]+\.\w+$', email):
+            flash("Invalid email format!", "warning")
             return redirect(url_for('contact'))
 
-        # Save message to the database
+        if 'user_id' in session:
+            user = user_repository.get_user_by_id(session['user_id'])
+            if user and (user.username != name or user.email != email):
+                flash("The provided name or email does not match your account!", "danger")
+                return redirect(url_for('contact'))
+
+        # Save the contact message
         new_message = ContactMessage(name=name, email=email, message=message)
         db.session.add(new_message)
         db.session.commit()
 
-        flash("Thank you for reaching out! We’ll get back to you soon.", "success")
+        flash("Your message has been sent successfully!", "success")
         return redirect(url_for('contact'))
 
     return render_template('contact.html')
 
+# Admin Message Route
 @app.route('/admin/messages')
 def admin_messages():
     if 'user_id' not in session or not session.get('is_admin', False):
@@ -376,18 +370,20 @@ def admin_messages():
     messages = ContactMessage.query.order_by(ContactMessage.created_at.desc()).all()
     return render_template('admin_messages.html', messages=messages)
 
+# Delete message Route
 @app.route('/delete_message/<int:message_id>')
 def delete_message(message_id):
     message = ContactMessage.query.get_or_404(message_id)
     db.session.delete(message)
     db.session.commit()
-    flash("Message deleted successfully!", "success")
+    flash('Message deleted successfully!', 'success')
     return redirect(url_for('admin_messages'))
 
+# Highlight Message Route
 @app.route('/highlight_message/<int:message_id>')
 def highlight_message(message_id):
     message = ContactMessage.query.get_or_404(message_id)
-    message.highlighted = not message.highlighted  # Toggle highlight status
+    message.highlighted = not message.highlighted  
     db.session.commit()
     flash("Message highlight status updated!", "info")
     return redirect(url_for('admin_messages'))
@@ -400,7 +396,9 @@ def admin_dashboard():
         return redirect(url_for('login'))
 
     user = user_repository.get_user_by_id(session['user_id'])
-    if not user.is_admin:
+    if not user or not user.is_admin:
+        if not user:
+            session.pop('user_id', None)
         flash('Access denied! Admins only.', 'danger')
         return redirect(url_for('home'))
 
@@ -419,9 +417,20 @@ def admin_dashboard():
             return redirect(url_for('edit_recipe', recipe_id=recipe_id)) 
     return render_template('admin_dashboard.html', recipes=recipes)
 
-# Create Database and Tables (run once when starting the app)
+# Create Database and Tables
 with app.app_context():
     db.create_all()
+    # Check if the categories already exist; if not, insert them
+    if Category.query.count() == 0: 
+        category1 = Category(name="Appetizer")
+        category2 = Category(name="Main Course")
+        category3 = Category(name="Dessert")
+        category4 = Category(name="Drinks")
+
+        # Add categories to session
+        db.session.add_all([category1, category2, category3, category4])
+        db.session.commit()
+        print("Categories added to the database.")
 
 if __name__ == '__main__':
     app.run(debug=True)

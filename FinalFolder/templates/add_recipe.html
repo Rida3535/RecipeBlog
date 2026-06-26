@@ -5,7 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% if recipe %}Edit Recipe{% else %}Add Recipe{% endif %}</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/theme.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/add_recipe.css') }}">
+    <script src="{{ url_for('static', filename='js/theme.js') }}"></script>
 </head>
 
 <body>
@@ -23,6 +26,10 @@
                     <a href="{{ url_for('home') }}">Home</a>
                     <a href="{{ url_for('admin_dashboard') }}">Dashboard</a>
                     <a href="{{ url_for('logout') }}">Logout</a>
+                    <button class="theme-toggle" id="theme-toggle-btn" aria-label="Toggle Theme">
+                        <i class="fas fa-moon"></i>
+                        <i class="fas fa-sun"></i>
+                    </button>
                 </nav>
             </div>
         </header>
@@ -41,7 +48,7 @@
 
                 <label>Ingredients (comma-separated, e.g., Ingredient1: Quantity, Ingredient2: Quantity):</label>
                 <textarea name="ingredients"
-                    required>{% if recipe and recipe.ingredients %}{% for ingredient in recipe.ingredients %}{{ ingredient.name }}: {{ ingredient.quantity }}, {% endfor %}{% endif %}</textarea><br>
+                    required>{% if recipe and recipe.ingredients %}{% for ingredient in recipe.ingredients %}{{ ingredient.name }}: {{ ingredient.quantity }}{% if not loop.last %}, {% endif %}{% endfor %}{% endif %}</textarea><br>
 
                 <label>Instructions:</label>
                 <textarea name="instructions" required>{{ recipe.instructions if recipe else '' }}</textarea><br>
@@ -78,11 +85,10 @@
         </div>
     </div>
     <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Recipe Blog. All rights reserved.</p>
+        </div>
+    </footer>
 </body>
-<footer>
-    <div class="container">
-        <p>&copy; 2025 Recipe Blog. All rights reserved.</p>
-    </div>
-</footer>
-
 </html>

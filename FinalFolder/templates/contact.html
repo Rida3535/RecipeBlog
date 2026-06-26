@@ -4,7 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact | Ricette Deliziose</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/theme.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/contact.css') }}">
+    <script src="{{ url_for('static', filename='js/theme.js') }}"></script>
 </head>
 <body>
     <header>
@@ -34,6 +37,10 @@
                 <!-- Not Logged In -->
                 <a href="{{ url_for('login') }}">Login</a>
                 {% endif %}
+                <button class="theme-toggle" id="theme-toggle-btn" aria-label="Toggle Theme">
+                    <i class="fas fa-moon"></i>
+                    <i class="fas fa-sun"></i>
+                </button>
         </nav>
          </div>
     </header>
@@ -41,6 +48,17 @@
     <main>
         <section id="contact-form">
             <div class="section-title"><h3>Contact Us</h3></div>
+
+            <!-- Flash Messages Display -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div  id="flash-message" class="alert alert-{{ messages[0][0] }}">
+                    {{ messages[0][1] }}
+                </div>
+            {% endif %}
+            {% endwith %}
+            <!-- End Flash Messages -->
+
             <form action="{{ url_for('contact') }}" method="POST">
                 <div class="form-group">
                     <input type="text" id="name" name="name" placeholder="Your Name" required value="{{ request.form.get('name', '') }}">
@@ -57,7 +75,9 @@
         
     </main>
     <footer>
-        <p>&copy; 2024 Taste Tales. All rights reserved.</p>
+        <p>&copy; 2024 Recipe Blog. All rights reserved.</p>
     </footer>
+
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
 </body>
 </html>

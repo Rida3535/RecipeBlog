@@ -5,21 +5,21 @@ class RecipeRepository:
         return Recipe.query.all()
 
     def get_recipe_by_id(self, recipe_id):
-        return Recipe.query.get(recipe_id)
+        return db.session.get(Recipe, recipe_id)
 
     def add_recipe(self, recipe):
         db.session.add(recipe)
         db.session.commit()
 
     def delete_recipe(self, recipe_id):
-        recipe = Recipe.query.get(recipe_id)
+        recipe = db.session.get(Recipe, recipe_id)
         if recipe:
             db.session.delete(recipe)
             db.session.commit()    
 
 class UserRepository:
     def get_user_by_id(self, user_id):
-        return User.query.get(user_id)
+        return db.session.get(User, user_id)
 
     def get_user_by_email(self, email):
         return db.session.query(User).filter_by(email=email.lower()).first()
@@ -30,8 +30,10 @@ class UserRepository:
 
     def like_recipe(self, user_id, recipe_id):
         user = self.get_user_by_id(user_id)
-        recipe = Recipe.query.get(recipe_id)
-        if recipe not in user.liked_recipes:
+        if not user:
+            return False
+        recipe = db.session.get(Recipe, recipe_id)
+        if recipe and recipe not in user.liked_recipes:
             user.liked_recipes.append(recipe)
             db.session.commit()
             return True
@@ -44,8 +46,10 @@ class UserRepository:
         return [] 
     def unlike_recipe(self, user_id, recipe_id):
         user = self.get_user_by_id(user_id)
-        recipe = Recipe.query.get(recipe_id)
-        if recipe in user.liked_recipes:
+        if not user:
+            return False
+        recipe = db.session.get(Recipe, recipe_id)
+        if recipe and recipe in user.liked_recipes:
             user.liked_recipes.remove(recipe)
             db.session.commit()
             return True
