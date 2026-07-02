@@ -47,7 +47,7 @@ body {
 /* Header & Navigation consolidated in theme.css */
 
 main h2 {
-    background: var(--btn-gradient);
+    background: var(--accent-blue);
 }
 
 /* Categories Section */
@@ -77,10 +77,9 @@ main h2 {
 
 /* Active Category Style */
 .categories a.active {
-    background: #eba223;
+    background: var(--btn-gradient);
     transform: none;
     pointer-events: none;
-    outline: 3px solid var(--accent-orange);
 }
 
 /* Recipe Grid */
