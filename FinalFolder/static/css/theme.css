@@ -3,6 +3,18 @@
    Shared CSS variables + dark mode + gradient utilities
    ══════════════════════════════════════════════════════════ */
 
+/* Global Reset & Border Box */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+}
+
 /* ── Light Theme (default) ─────────────────────────────── */
 :root {
     --bg-primary: #ffffff;
@@ -404,19 +416,28 @@ footer p {
     }
 
     header nav .box {
-        width: 100%;
-        justify-content: center;
+        width: auto;
+        align-self: center;
         margin-bottom: 10px;
+        position: relative;
     }
 
     header nav .input {
-        width: 100% !important;
-        max-width: 300px;
+        width: 280px !important;
+        height: 45px !important;
+        padding-left: 45px !important;
+        text-indent: 0 !important;
+        background: #fff !important;
+        border: 2px solid var(--accent-gold) !important;
+        color: var(--text-primary) !important;
+        border-radius: 50px !important;
     }
 
-    .box:hover input,
-    .input:focus {
-        width: 100% !important;
-        max-width: calc(100vw - 80px) !important;
+    header nav .box i {
+        left: 15px !important;
+        top: 11px !important;
+        color: var(--accent-blue) !important;
+        opacity: 1 !important;
+        font-size: 20px !important;
     }
 }
