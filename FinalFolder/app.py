@@ -28,7 +28,16 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 # Home Page Route - Display all recipes
 @app.route('/')
 def home():
-      return "Hello Railway!"
+    liked_recipe_id = []
+    if 'user_id' in session:
+        user = user_repository.get_user_by_id(session['user_id'])
+        if user:
+            liked_recipe_id = [recipe.id for recipe in user.liked_recipes]
+        else:
+            session.pop('user_id', None)
+
+    recipes = recipe_repository.get_all_recipes()  # Get all recipes
+    return render_template('index.html', recipes=recipes, liked_recipe_id=liked_recipe_id)
 
 
 # Recipe List Route (for listing all recipes or filtering by category)
