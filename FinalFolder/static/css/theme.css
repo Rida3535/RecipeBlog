@@ -184,11 +184,12 @@ header .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%;    
-    max-width: 1600px;
-    margin: 0 auto;
-    padding: 0 45px;
-    box-sizing: border-box;
+
+    width: 100%;
+    max-width: none;
+
+    padding: 0 40px;
+    margin: 0;
 }
 
 header .logo-title {
