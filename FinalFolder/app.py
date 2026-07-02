@@ -416,21 +416,21 @@ def admin_dashboard():
         if action == 'edit' and recipe_id:
             return redirect(url_for('edit_recipe', recipe_id=recipe_id)) 
     return render_template('admin_dashboard.html', recipes=recipes)
-'''
-# Create Database and Tables
-with app.app_context():
-    db.create_all()
-    # Check if the categories already exist; if not, insert them
-    if Category.query.count() == 0: 
-        category1 = Category(name="Appetizer")
-        category2 = Category(name="Main Course")
-        category3 = Category(name="Dessert")
-        category4 = Category(name="Drinks")
 
-        # Add categories to session
-        db.session.add_all([category1, category2, category3, category4])
-        db.session.commit()
-        print("Categories added to the database.") '''
+# Create Database and Tables
+#with app.app_context():
+  #  db.create_all()
+  #  # Check if the categories already exist; if not, insert them
+ #   if Category.query.count() == 0: 
+    #    category1 = Category(name="Appetizer")
+   #     category2 = Category(name="Main Course")
+  #      category3 = Category(name="Dessert")
+ #       category4 = Category(name="Drinks")
+#
+   #     # Add categories to session
+  #      db.session.add_all([category1, category2, category3, category4])
+ #       db.session.commit()
+#        print("Categories added to the database.") 
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
