@@ -418,7 +418,7 @@ def admin_dashboard():
     return render_template('admin_dashboard.html', recipes=recipes)
 
 # Create Database and Tables
-with app.app_context():
+#with app.app_context():
     db.create_all()
     # Check if the categories already exist; if not, insert them
     if Category.query.count() == 0: 
