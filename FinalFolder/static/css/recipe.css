@@ -44,53 +44,7 @@ body {
     flex: 1;
 }
 
-/* Header */
-header {
-    background: var(--header-gradient);
-    color: white;
-    padding: 20px 0;
-    text-align: center;
-}
-
-header .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 45px;
-}
-
-header .logo-title {
-    display: flex;
-    align-items: center;
-}
-
-header .logo-title .logo {
-    margin-right: 10px;
-}
-
-header .logo-title h1 {
-    margin: 0;
-    padding: 0;
-    font-family: 'Gistesy', sans-serif;
-    font-size: 2.5rem;
-    line-height: 1;
-}
-
-header nav {
-    display: inline-flex;
-    align-items: center;
-}
-
-header nav a {
-    color: white;
-    margin: 0 10px;
-    font-weight: bold;
-}
-
-header nav a:hover {
-    color: #f8f9fa;
-    text-decoration: underline;
-}
+/* Header & Navigation consolidated in theme.css */
 
 main h2 {
     background: var(--btn-gradient);
@@ -273,32 +227,26 @@ main h2 {
     text-transform: capitalize;
 }
 
-/* Footer */
-footer {
-    background: var(--footer-bg);
-    color: var(--footer-text);
-    text-align: center;
-    padding: 10px;
-    margin-top: auto;
-}
-
-footer p {
-    font-size: 1em;
-}
+/* Footer consolidated in theme.css */
 
 /* Mobile Responsiveness */
 @media (max-width: 768px) {
-    header .container {
-        flex-direction: column;
-        align-items: center;
+    .categories {
+        gap: 10px;
+        padding: 0 15px;
     }
 
-    .categories {
-        flex-direction: column;
-        align-items: center;
+    .categories a {
+        padding: 12px 20px;
+        font-size: 1rem;
+        flex: 1 1 calc(50% - 10px);
+        min-width: 120px;
+        text-align: center;
     }
 
     .recipe-item {
-        width: 90%;
+        width: 100%;
+        max-width: 320px;
+        margin: 0 auto;
     }
 }

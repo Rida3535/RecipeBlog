@@ -24,54 +24,7 @@ body {
 }
 
 /* Header Styling */
-header {
-    background: var(--header-gradient);
-    color: white;
-    padding: 20px 0;
-    text-align: center;
-    position: relative;
-}
-
-header .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 45px;
-}
-
-header .logo-title {
-    display: flex;
-    align-items: center;
-}
-
-header .logo-title .logo {
-    margin-right: 10px;
-}
-
-header .logo-title h1 {
-    margin: 0;
-    padding: 0;
-    font-family: 'Gistesy', sans-serif;
-    font-size: 2.5rem;
-    line-height: 1;
-}
-
-header nav {
-    display: inline-flex;
-    align-items: center;
-}
-
-header nav a {
-    color: white;
-    margin: 0 10px;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-header nav a:hover {
-    color: #f8f9fa;
-    text-decoration: underline;
-}
+/* Header consolidated in theme.css */
 
 /* Contact Form Section */
 #contact-form {
@@ -210,15 +163,24 @@ header nav a:hover {
     pointer-events: none;
 }
 
-/* Footer */
-footer {
-    background: var(--footer-bg);
-    color: var(--footer-text);
-    text-align: center;
-    padding: 10px;
-    margin-top: auto;
-}
+/* Footer consolidated in theme.css */
 
-footer p {
-    font-size: 1em;
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    #contact-form {
+        padding: 24px 15px;
+        margin: 20px 10px;
+        max-width: 100%;
+    }
+
+    #contact-form .section-title {
+        font-size: 1.5rem;
+        padding: 8px 16px;
+    }
+
+    #contact-form input, 
+    #contact-form textarea {
+        font-size: 15px;
+        padding: 10px;
+    }
 }

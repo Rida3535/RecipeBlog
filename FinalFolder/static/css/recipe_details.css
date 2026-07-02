@@ -19,52 +19,7 @@ body {
 }
 
 /* Header */
-header {
-    background: var(--header-gradient);
-    color: white;
-    padding: 15px 20px;
-    box-shadow: 0 2px 4px var(--shadow-color);
-}
-
-header .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 45px;
-}
-
-header .logo-title {
-    display: flex;
-    align-items: center;
-}
-
-header .logo-title .logo {
-    margin-right: 10px;
-}
-
-header .logo-title h1 {
-    margin: 0;
-    padding: 0;
-    font-family: 'Gistesy', sans-serif;
-    font-size: 2.5rem;
-    line-height: 1;
-}
-
-header nav {
-    display: inline-flex;
-    align-items: center;
-}
-
-header nav a {
-    margin-left: 20px;
-    color: white;
-    font-weight: bold;
-}
-
-header nav a:hover {
-    color: #f8f9fa;
-    text-decoration: underline;
-}
+/* Header consolidated in theme.css */
 
 /* Recipe Detail Container */
 .recipe-detail-container {
@@ -158,32 +113,35 @@ header nav a:hover {
     font-weight: bold;
 }
 
-/* Footer */
-footer {
-    background: var(--footer-bg);
-    color: var(--footer-text);
-    text-align: center;
-    padding: 10px;
-    margin-top: auto;
-}
-
-footer p {
-    font-size: 1em;
-}
+/* Footer consolidated in theme.css */
 
 /* Responsive Design */
 @media (max-width: 768px) {
     .recipe-detail-container {
-        padding: 15px;
-        margin: 10px;
+        padding: 20px 15px;
+        margin: 15px 10px;
     }
 
-    header nav a {
-        margin-left: 10px;
-        font-size: 0.9em;
+    .recipe-detail-container h1 {
+        font-size: 1.5rem;
+        padding: 8px 16px;
     }
 
     .recipe-image img {
-        max-height: 300px;
+        max-height: 260px;
+    }
+
+    .recipe-description {
+        font-size: 1rem;
+    }
+
+    .recipe-ingredients h2,
+    .recipe-instructions h2 {
+        font-size: 1.4rem;
+    }
+
+    .recipe-ingredients li,
+    .recipe-instructions li {
+        font-size: 0.95rem;
     }
 }

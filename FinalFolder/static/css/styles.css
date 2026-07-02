@@ -30,159 +30,7 @@ body {
     /* This ensures the content takes up the remaining space */
 }
 
-/* Header */
-header {
-    background: var(--header-gradient);
-    color: white;
-    padding: 20px 0;
-    text-align: center;
-    display: inline;
-   /* position: relative;*/
-    /* Ensures search bar is positioned correctly */
-}
-
-header .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 45px;
-}
-
-header .logo-title {
-    display: flex;
-    align-items: center;
-}
-
-header .logo-title .logo {
-    margin-right: 10px; /* Remove any default spacing */
-}
-
-header .logo-title h1 {
-    margin: 0;
-    padding: 0;
-    font-family: 'Gistesy', sans-serif;
-    font-size: 2.5rem; /* Adjust font size as needed */
-    line-height: 1; /* Ensure vertical alignment */
-}
-
-header nav{
-    display: inline-flex;
-    align-items: center;
-}
-
-.headtext{
-    padding-top: 0px;
-}
-
-header nav a {
-    color: white;
-    margin: 0 10px;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-header nav a:hover {
-    color: #f8f9fa;
-    text-decoration: underline;
-}
-
-/* Responsive Menu Button */
-.menu-btn {
-    display: none;
-    background: none;
-    border: none;
-    color: white;
-    font-size: 1.5em;
-    cursor: pointer;
-}
-
-@media (max-width: 768px) {
-    nav {
-        display: none;
-        flex-direction: column;
-        position: absolute;
-        top: 60px;
-        right: 20px;
-        background: #ff7f50;
-        padding: 10px;
-        border-radius: 5px;
-        z-index: 10;
-    }
-
-    nav.active {
-        display: flex;
-    }
-
-    .menu-btn {
-        display: block;
-    }
-}
-
-/* Search Bar Styling */
-.box {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-}
-
-.input {
-    padding: 10px;
-    width: 50px; /* Collapsed width */
-    height: 50px;
-    background: #fff;
-    border: 4px solid #fff;
-    border-radius: 50px;
-    box-sizing: border-box;
-    font-size: 18px;
-    outline: none;
-    transition: width 0.5s ease, background 0.3s ease, text-indent 0.3s ease;
-    text-indent: 50px; /* Push text away to avoid overlap with icon */
-}
-
-/* Expand input field on hover */
-.box:hover input,
-.input:focus {
-    width: 350px; /* Expanded width */
-    background: var(--accent-gold);
-    text-indent: 10px; /* Reset text position */
-}
-
-/* Icon Styling */
-.box i {
-    position: absolute;
-    left: 13px;
-    top: 13px;
-    z-index: 2;
-    font-size: 23px;
-    color: var(--accent-blue);
-    cursor: pointer;
-    transition: opacity 0.3s ease;
-}
-
-/* Hide icon when input is hovered or focused */
-.box:hover i,
-.input:focus + i {
-    opacity: 0; /* Icon fades out smoothly */
-}
-
-/* Placeholder text styling */
-.input::placeholder {
-    color: transparent; /* Hide placeholder when input is collapsed */
-    transition: color 0.3s ease;
-    font-size: 14px;
-}
-
-/* Show placeholder text when input is expanded */
-.input:focus::placeholder,
-.box:hover .input::placeholder {
-    color: #fff; /* Visible placeholder in expanded state */
-}
-
-/* Text behavior when typing */
-.input:focus {
-    background: var(--accent-gold); /* Background changes */
-    color: #fff; /* Text color */
-}
+/* Header, Navigation and Search styles consolidated in theme.css */
 
 
 /* Hero Section */
@@ -502,19 +350,7 @@ header nav a:hover {
     top: -4px;
 }
 
-/* Footer */
-footer {
-    background: var(--footer-bg);
-    color: var(--footer-text);
-    text-align: center;
-    padding: 10px;
-    margin-top: auto;
-    /* Ensures the footer stays at the bottom */
-}
-
-footer p {
-    font-size: 1em;
-}
+/* Footer styling consolidated in theme.css */
 
 /* Login prompt on cards */
 .recipe-card p a {
@@ -524,4 +360,57 @@ footer p {
 
 .recipe-card p a:hover {
     color: var(--accent-orange);
+}
+
+/* ── Hero Section & Content Responsiveness ─────────────── */
+@media (max-width: 768px) {
+    .hero-section {
+        height: 400px;
+    }
+    
+    .hero-content h2 {
+        font-size: 1.8rem;
+    }
+
+    .hero-content p {
+        font-size: 1.1rem;
+        margin: 15px 0;
+    }
+
+    .hero-content .btn {
+        padding: 10px 20px;
+        font-size: 0.95rem;
+    }
+
+    #recipes {
+        padding: 20px 10px;
+    }
+
+    .section-title {
+        font-size: 1rem;
+        padding: 8px 16px;
+    }
+
+    .recipe-card {
+        width: 100%;
+        max-width: 320px;
+    }
+
+    .about-section {
+        padding: 20px 15px;
+        margin: 20px 10px;
+    }
+
+    .about-section h2 {
+        font-size: 1.5rem;
+    }
+
+    .about-section p, 
+    .about-section ul li {
+        font-size: 1rem;
+    }
+
+    .about-section h3 {
+        font-size: 1.1rem;
+    }
 }

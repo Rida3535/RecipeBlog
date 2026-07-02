@@ -23,65 +23,7 @@ body {
     flex: 1;
 }
 
-/* Header */
-header {
-    background: var(--header-gradient);
-    color: white;
-    padding: 20px 0;
-    text-align: center;
-    position: relative;
-}
-
-header .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 45px;
-}
-
-header .logo-title {
-    display: flex;
-    align-items: center;
-}
-
-header .logo-title .logo {
-    margin-right: 10px;
-}
-
-header .logo-title h1 {
-    margin: 0;
-    padding: 0;
-    font-family: 'Gistesy', sans-serif;
-    font-size: 2.5rem;
-    line-height: 1;
-}
-
-header nav {
-    display: inline-flex;
-    align-items: center;
-}
-
-header nav a {
-    color: white;
-    margin: 0 10px;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-header nav a:hover {
-    color: #f8f9fa;
-    text-decoration: underline;
-}
-
-/* Responsive Menu Button */
-.menu-btn {
-    display: none;
-    background: none;
-    border: none;
-    color: white;
-    font-size: 1.5em;
-    cursor: pointer;
-}
+/* Header consolidated in theme.css */
 
 /* Profile Container */
 .profile-container {
@@ -219,15 +161,25 @@ header nav a:hover {
     box-shadow: 0 6px 15px rgba(255, 104, 48, 0.4);
 }
 
-/* Footer */
-footer {
-    background: var(--footer-bg);
-    color: var(--footer-text);
-    text-align: center;
-    padding: 10px;
-    margin-top: auto;
-}
+/* Footer consolidated in theme.css */
 
-footer p {
-    font-size: 1em;
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .profile-container {
+        padding: 20px 15px;
+        margin: 20px 10px;
+        width: auto;
+    }
+
+    .profile-card h2 {
+        font-size: 1.6rem;
+    }
+
+    .liked-recipes h3 {
+        font-size: 1.5rem;
+    }
+
+    .recipe-list {
+        grid-template-columns: 1fr;
+    }
 }

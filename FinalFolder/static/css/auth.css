@@ -18,50 +18,7 @@ body {
     flex-direction: column;
 }
 
-/* ── Header ─────────────────────────────────────────────── */
-header {
-    background: var(--header-gradient);
-    color: white;
-    padding: 16px 0;
-}
-
-header .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 45px;
-}
-
-header .logo-title {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    text-decoration: none;
-}
-
-header .logo-title h1 {
-    font-family: 'Gistesy', sans-serif;
-    font-size: 2.4rem;
-    color: white;
-    line-height: 1;
-    margin: 0;
-}
-
-header nav {
-    display: inline-flex;
-    align-items: center;
-}
-
-header nav a {
-    color: white;
-    margin: 0 10px;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 0.95rem;
-    transition: opacity 0.2s;
-}
-
-header nav a:hover { opacity: 0.8; text-decoration: underline; }
+/* Header consolidated in theme.css */
 
 /* ── Main wrapper ────────────────────────────────────────── */
 main {
@@ -235,18 +192,13 @@ main {
 }
 .btn-close:hover { opacity: 1; }
 
-/* ── Footer ──────────────────────────────────────────────── */
-footer {
-    background: var(--footer-bg);
-    color: var(--footer-text);
-    text-align: center;
-    padding: 12px;
-}
-
-footer p { font-size: 0.9rem; }
+/* Footer consolidated in theme.css */
 
 /* ── Responsive ──────────────────────────────────────────── */
 @media (max-width: 520px) {
-    .auth-card { padding: 32px 22px; }
-    header .container { padding: 0 18px; }
+    .auth-card { 
+        padding: 30px 20px; 
+        max-width: calc(100% - 20px);
+        margin: 10px;
+    }
 }
