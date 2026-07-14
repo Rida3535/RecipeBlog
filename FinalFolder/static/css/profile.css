@@ -147,18 +147,18 @@ body {
     padding: 10px 20px;
     font-size: 1em;
     color: white;
-    background: var(--btn-gradient);
+    background: var(--accent-blue);
     text-decoration: none;
     border-radius: 25px;
     font-weight: 600;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 10px rgba(255, 104, 48, 0.3);
+     box-shadow: 0 4px 10px rgba(82, 107, 167, 0.3);
 }
 
 .btn:hover {
-    background: var(--btn-gradient-hover);
+   background: var(--accent-blue-dark);
     transform: translateY(-2px);
-    box-shadow: 0 6px 15px rgba(255, 104, 48, 0.4);
+    box-shadow: 0 4px 10px rgba(82, 107, 167, 0.3);
 }
 
 /* Footer consolidated in theme.css */
